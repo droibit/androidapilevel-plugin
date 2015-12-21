@@ -1,0 +1,163 @@
+{
+  "apis": [
+    {
+      "apiLevel": 23,
+      "name": "Marshmallow",
+      "link": "http://developer.android.com/about/versions/marshmallow/android-6.0.html",
+      "platformVersions": ["6.0"],
+      "versionCode": "M"
+    },
+    {
+      "apiLevel": 22,
+      "name": "Lollipop",
+      "link": "http://developer.android.com/about/versions/android-5.1.html",
+      "platformVersions": ["5.1"],
+      "versionCode": "LOLLIPOP_MR1"
+    },
+    {
+      "apiLevel": 21,
+      "name": "Lollipop",
+      "link": "http://developer.android.com/about/versions/android-5.0.html",
+      "platformVersions": ["5.0"],
+      "versionCode": "LOLLIPOP"
+    },
+    {
+      "apiLevel": 20,
+      "name": "KitKat",
+      "platformVersions": ["4.4W"],
+      "versionCode": "KITKAT_WATCH"
+    },
+    {
+      "apiLevel": 19,
+      "name": "KitKat",
+      "link": "http://developer.android.com/about/versions/android-4.4.html",
+      "platformVersions": ["4.4"],
+      "versionCode": "KITKAT"
+    },
+    {
+      "apiLevel": 18,
+      "name": "Jelly Bean",
+      "link": "http://developer.android.com/about/versions/android-4.3.html",
+      "platformVersions": ["4.3"],
+      "versionCode": "JELLY_BEAN_MR2"
+    },
+    {
+      "apiLevel": 17,
+      "name": "Jelly Bean",
+      "link": "http://developer.android.com/about/versions/android-4.2.html",
+      "platformVersions": ["4.2", "4.2.2"],
+      "versionCode": "JELLY_BEAN_MR1"
+    },
+    {
+      "apiLevel": 16,
+      "name": "Jelly Bean",
+      "link": "http://developer.android.com/about/versions/android-4.1.html",
+      "platformVersions": ["4.1", "4.1.1"],
+      "versionCode": "JELLY_BEAN"
+    },
+    {
+      "apiLevel": 15,
+      "name": "Ice Cream Sandwich",
+      "link": "http://developer.android.com/about/versions/android-4.0.3.html",
+      "platformVersions": ["4.0.3", "4.0.4"],
+      "versionCode": "ICE_CREAM_SANDWICH_MR1"
+    },
+    {
+      "apiLevel": 14,
+      "name": "Ice Cream Sandwich",
+      "link": "http://developer.android.com/about/versions/android-4.0.html",
+      "platformVersions": ["4.0", "4.0.1", "4.0.2"],
+      "versionCode": "ICE_CREAM_SANDWICH"
+    },
+    {
+      "apiLevel": 13,
+      "name": "Honeycomb",
+      "link": "http://developer.android.com/about/versions/android-3.2.html",
+      "platformVersions": ["3.2"],
+      "versionCode": "HONEYCOMB_MR2"
+    },
+    {
+      "apiLevel": 12,
+      "name": "Honeycomb",
+      "link": "http://developer.android.com/about/versions/android-3.1.html",
+      "platformVersions": ["3.1.x"],
+      "versionCode": "HONEYCOMB_MR1"
+    },
+    {
+      "apiLevel": 11,
+      "name": "Honeycomb",
+      "link": "http://developer.android.com/about/versions/android-3.0.html",
+      "platformVersions": ["3.0.x"],
+      "versionCode": "HONEYCOMB"
+    },
+    {
+      "apiLevel": 10,
+      "name": "Honeycomb",
+      "link": "http://developer.android.com/about/versions/android-2.3.3.html",
+      "platformVersions": ["2.3.3", "2.3.4"],
+      "versionCode": "GINGERBREAD_MR1"
+    },
+    {
+      "apiLevel": 9,
+      "name": "Gingerbread",
+      "link": "http://developer.android.com/about/versions/android-2.3.html",
+      "platformVersions": ["2.3", "2.3.1", "2.3.2"],
+      "versionCode": "GINGERBREAD"
+    },
+    {
+      "apiLevel": 8,
+      "name": "Froyo",
+      "link": "http://developer.android.com/about/versions/android-2.2.html",
+      "platformVersions": ["2.2.x"],
+      "versionCode": "FROYO"
+    },
+    {
+      "apiLevel": 7,
+      "name": "Eclair",
+      "link": "http://developer.android.com/about/versions/android-2.1.html",
+      "platformVersions": ["2.1.x"],
+      "versionCode": "ECLAIR_MR1"
+    },
+    {
+      "apiLevel": 6,
+      "name": "Eclair",
+      "link": "http://developer.android.com/about/versions/android-2.0.1.html",
+      "platformVersions": ["2.0.1"],
+      "versionCode": "ECLAIR_0_1"
+    },
+    {
+      "apiLevel": 5,
+      "name": "Eclair",
+      "link": "http://developer.android.com/about/versions/android-2.0.html",
+      "platformVersions": ["2.0"],
+      "versionCode": "ECLAIR"
+    },
+    {
+      "apiLevel": 4,
+      "name": "Donut",
+      "link": "http://developer.android.com/about/versions/android-1.6.html",
+      "platformVersions": ["1.6"],
+      "versionCode": "DONUT"
+    },
+    {
+      "apiLevel": 3,
+      "name": "Cupcake",
+      "link": "http://developer.android.com/about/versions/android-1.5.html",
+      "platformVersions": ["1.5"],
+      "versionCode": "CUPCAKE"
+    },
+    {
+      "apiLevel": 2,
+      "name": "-",
+      "link": "http://developer.android.com/about/versions/android-1.1.html",
+      "platformVersions": ["1.1"],
+      "versionCode": "BASE_1_1"
+    },
+    {
+      "apiLevel": 1,
+      "name": "-",
+      "platformVersions": ["1.0"],
+      "versionCode": "BASE"
+    }
+  ]
+}
