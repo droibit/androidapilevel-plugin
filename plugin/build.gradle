@@ -1,0 +1,36 @@
+plugins {
+    id 'org.jetbrains.intellij' version '0.0.25'
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'kotlin'
+
+intellij {
+    version '14.1.5'
+    pluginName 'androidapimap-plugin'
+    plugins 'android'
+    updateSinceUntilBuild false
+}
+
+group 'com.github.droibit'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}

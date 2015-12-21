@@ -1,0 +1,7 @@
+*.xml
+.name
+
+!/runConfigurations/*.xml
+!/copyright/*.xml
+!gradle.xml
+!encodings.xml
