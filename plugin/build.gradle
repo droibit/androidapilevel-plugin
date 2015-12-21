@@ -27,8 +27,10 @@ sourceSets {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    compile 'com.squareup.moshi:moshi:1.0.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testCompile 'junit:junit:4.12'
 }
 
 task wrapper(type: Wrapper) {

@@ -144,6 +144,8 @@
     <orderEntry type="library" name="Gradle: com.jetbrains:sdk-common:14.1.5" level="project" />
     <orderEntry type="library" name="Gradle: com.jetbrains:sdk-tools:14.1.5" level="project" />
     <orderEntry type="library" name="Gradle: com.jetbrains:sdklib:14.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.moshi:moshi:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.jetbrains:resources_en:14.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.4.0" level="project" />
   </component>
 </module>
