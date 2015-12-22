@@ -14,8 +14,11 @@ private const val PREFIX_ANDROID = "Android "
 /**
  * @author kumagai
  */
-data class AndroidApis(@Json(name = "apis") val items: Array<AndroidApi>) {
-   @Transient val nameMap: Map<String, List<AndroidApi>> by lazy { items.groupBy { it.name } }
+data class AndroidApis(@Json(name = "apis") val items: Array<AndroidApi>)
+{
+    // Sorted in descending order by Android version.
+    val sortedNameMap: Map<String, List<AndroidApi>>
+        get() = items.groupBy { it.name }
 }
 
 /**

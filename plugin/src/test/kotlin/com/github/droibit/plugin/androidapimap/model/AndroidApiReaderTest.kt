@@ -3,11 +3,13 @@ package com.github.droibit.plugin.androidapimap.model
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.jsonFile
 import org.junit.Assert.*
 import org.hamcrest.CoreMatchers.*
+import org.hamcrest.Matchers.contains
+import org.hamcrest.Matchers.empty
 import org.junit.Test
 import java.io.File
 
 /**
- * Created by kumagai on 2015/12/22.
+ * @author kumagai
  */
 class AndroidApiReaderTest {
 
@@ -25,8 +27,31 @@ class AndroidApiReaderTest {
 
         assertThat(androidApis, `is`(notNullValue()))
 
-        val apis = checkNotNull(androidApis?.items)
-        assertThat(apis.size, `is`(23))
+        val apis = checkNotNull(androidApis)
+        assertThat(apis.items.size, `is`(23))
+    }
+
+    @Test
+    fun checkAndroidName() {
+        val apis = checkNotNull(AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH)))
+        val androidNames = arrayOf(
+                "Marshmallow",
+                "Lollipop",
+                "KitKat",
+                "Jelly Bean",
+                "Ice Cream Sandwich",
+                "Honeycomb",
+                "Gingerbread",
+                "Froyo",
+                "Eclair",
+                "Donut",
+                "Cupcake",
+                "-"
+        )
+
+        val readAndroidNames = apis.sortedNameMap.keys
+        assertThat(readAndroidNames, not(empty()))
+        assertThat(readAndroidNames, contains(*androidNames))
     }
 
     @Test
