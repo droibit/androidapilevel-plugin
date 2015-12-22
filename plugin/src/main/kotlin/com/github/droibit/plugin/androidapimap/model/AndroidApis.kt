@@ -1,4 +1,4 @@
-package com.github.droibit.plugin.androidapimap.entity
+package com.github.droibit.plugin.androidapimap.model
 
 /**
  * @author kumagai

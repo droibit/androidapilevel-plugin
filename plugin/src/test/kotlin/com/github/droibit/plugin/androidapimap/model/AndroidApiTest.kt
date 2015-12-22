@@ -1,5 +1,6 @@
-package com.github.droibit.plugin.androidapimap.entity
+package com.github.droibit.plugin.androidapimap.model
 
+import com.github.droibit.plugin.androidapimap.model.AndroidApi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import org.hamcrest.CoreMatchers.*
@@ -36,7 +37,7 @@ class AndroidApiTest {
 
         assertThat(api, `is`(notNullValue()))
         assertThat(api.apiLevel, `is`(23))
-        assertThat(api.link.isNullOrEmpty(), `is`(true))
+        assertThat(api.link.isNullOrEmpty(), `is`(false))
         assertThat(api.link, `is`("http://developer.android.com/about/versions/marshmallow/android-6.0.html"))
         assertThat(api.platformVersion, `is`(equalTo("Android 6.0")))
         assertThat(api.versionCode, `is`("M"))
