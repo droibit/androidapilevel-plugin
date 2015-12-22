@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AndroidApiMapDialog extends JDialog {
+
     private JPanel contentPane;
     private JButton buttonOK;
 
