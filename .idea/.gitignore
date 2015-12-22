@@ -1,7 +1,9 @@
 *.xml
-.name
+/libraries
 
+!.name
 !/runConfigurations/*.xml
 !/copyright/*.xml
 !gradle.xml
 !encodings.xml
+!modules.xml
