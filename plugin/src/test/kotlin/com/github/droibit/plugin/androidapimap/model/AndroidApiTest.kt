@@ -1,6 +1,5 @@
 package com.github.droibit.plugin.androidapimap.model
 
-import com.github.droibit.plugin.androidapimap.model.AndroidApi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import org.hamcrest.CoreMatchers.*

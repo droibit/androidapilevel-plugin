@@ -1,13 +1,46 @@
 package com.github.droibit.plugin.androidapimap.model
 
+import com.intellij.openapi.diagnostic.Logger
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import java.io.File
+import java.net.URL
+
+public const val ANDROID_API_JSON_PATH = "AndroidAPIs.json"
+
+private const val PREFIX_ANDROID = "Android "
+
 /**
  * @author kumagai
  */
-data class AndroidApis(val list: Array<AndroidApi>) {
-   @Transient val nameMap: Map<String, List<AndroidApi>> by lazy { list.groupBy { it.name } }
+data class AndroidApis(@Json(name = "apis") val items: Array<AndroidApi>) {
+   @Transient val nameMap: Map<String, List<AndroidApi>> by lazy { items.groupBy { it.name } }
 }
 
-private const val ANDROID = "Android "
+/**
+ * @author kumagai
+ */
+object AndroidApiReader {
+
+    val adapter: JsonAdapter<AndroidApis> by lazy {
+        Moshi.Builder().build().adapter(AndroidApis::class.java)
+    }
+    var logger: Logger? = null
+
+    fun jsonFile(fileName: String): URL?
+        = AndroidApiReader.javaClass.classLoader.getResource(fileName)
+
+    fun readFromJson(jsonUrl: URL?): AndroidApis? {
+        return try {
+            val json = File(jsonUrl?.toURI()).readText()
+            adapter.fromJson(json)
+        } catch (e: Exception) {
+            logger?.error("Json Parse Error", e)
+            null
+        }
+    }
+}
 
 /**
  * @property apiLevel Api Level.
@@ -15,6 +48,8 @@ private const val ANDROID = "Android "
  * @property link Link to the developer page.
  * @property platformVersions Android versions of API level.
  * @property versionCode Version code name that is defined in Android SDK.
+ *
+ * @author kumagai
  */
 data class AndroidApi(
         val apiLevel: Int,
@@ -26,7 +61,7 @@ data class AndroidApi(
     // e.g. Android 4.0, 4.0.1, 4.0.2
     val platformVersion: String
         get() = buildString {
-            append(ANDROID)
+            append(PREFIX_ANDROID)
             platformVersions.joinTo(this)
         }
 }
