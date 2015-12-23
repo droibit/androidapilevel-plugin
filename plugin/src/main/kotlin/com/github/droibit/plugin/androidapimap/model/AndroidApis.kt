@@ -19,6 +19,8 @@ data class AndroidApis(@Json(name = "apis") val items: Array<AndroidApi>)
     // Sorted in descending order by Android version.
     val sortedNameMap: Map<String, List<AndroidApi>>
         get() = items.groupBy { it.name }
+
+    val size: Int = items.size
 }
 
 /**
@@ -26,7 +28,7 @@ data class AndroidApis(@Json(name = "apis") val items: Array<AndroidApi>)
  */
 object AndroidApiReader {
 
-    val adapter: JsonAdapter<AndroidApis> by lazy {
+    private val adapter: JsonAdapter<AndroidApis> by lazy {
         Moshi.Builder().build().adapter(AndroidApis::class.java)
     }
     var logger: Logger? = null
@@ -61,7 +63,7 @@ data class AndroidApi(
         val platformVersions: Array<String>,
         val versionCode: String) {
 
-    // e.g. Android 4.0, 4.0.1, 4.0.2
+    // e.g. "Android 4.0, 4.0.1, 4.0.2"
     val platformVersion: String
         get() = buildString {
             append(PREFIX_ANDROID)
