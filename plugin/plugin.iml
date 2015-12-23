@@ -145,7 +145,7 @@
     <orderEntry type="library" name="Gradle: com.squareup.moshi:moshi:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.4.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4583" level="project" />
-    <orderEntry type="library" name="Gradle: com.jetbrains:resources_en:14.1.5" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-runtime:1.0.0-beta-4583" level="project" />
+    <orderEntry type="library" name="Gradle: com.jetbrains:resources_en:14.1.5" level="project" />
   </component>
 </module>

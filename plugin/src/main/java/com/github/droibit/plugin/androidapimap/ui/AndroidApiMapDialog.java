@@ -1,9 +1,8 @@
-package com.github.droibit.plugin.androidapimap;
+package com.github.droibit.plugin.androidapimap.ui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import static java.awt.event.KeyEvent.VK_ESCAPE;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;

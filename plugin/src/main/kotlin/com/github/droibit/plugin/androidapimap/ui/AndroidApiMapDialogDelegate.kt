@@ -1,4 +1,4 @@
-package com.github.droibit.plugin.androidapimap
+package com.github.droibit.plugin.androidapimap.ui
 
 import com.github.droibit.plugin.androidapimap.model.ANDROID_API_JSON_PATH
 import com.github.droibit.plugin.androidapimap.model.AndroidApi
