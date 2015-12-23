@@ -28,7 +28,7 @@ class AndroidApiReaderTest {
         assertThat(androidApis, `is`(notNullValue()))
 
         val apis = checkNotNull(androidApis)
-        assertThat(apis.items.size, `is`(23))
+        assertThat(apis.raw.size, `is`(23))
     }
 
     @Test
@@ -58,7 +58,7 @@ class AndroidApiReaderTest {
     fun checkApiLevels() {
         val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))
 
-        val apis = checkNotNull(androidApis?.items)
+        val apis = checkNotNull(androidApis?.raw)
         val reversedApis = apis.map { it.apiLevel }.reversed() // e.g. 23 .. 1 => 1 .. 23
         for (i in reversedApis.indices) {
             assertThat(i+1, `is`(reversedApis[i]))

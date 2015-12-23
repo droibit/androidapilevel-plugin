@@ -8,6 +8,7 @@ import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.readFromJs
 import com.intellij.openapi.diagnostic.Logger
 import java.awt.Component
 import java.awt.Cursor
+import java.awt.Cursor.HAND_CURSOR
 import java.awt.Desktop
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
@@ -50,8 +51,8 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
     private fun AndroidApiMapDialog.initFooter() {
         val url = URL(labelFooter.text)
         labelFooter.apply {
-            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)
-            text = "${underlineTextHtml(url)}"
+            cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
+            text = "${linkTextHtml(before="From: ",text=url)}"
         }
         labelFooter.onMouseClicked {
             // FIXME:
@@ -71,18 +72,23 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
         val headers = TABLE_HEADERS.map { it.first }.toTypedArray()
         val tableModel = ApiTableModel(columnNames = headers,
                                        columnCount = androidApis.size).apply {
-            for (api in androidApis.items) {
+            for (api in androidApis) {
                 addRow(api.toArray())
             }
         }
 
         apiTable.apply {
-            setDefaultRenderer(String::class.java, ApiLabelCellRenderer())
             model = tableModel
+            setShowGrid(false)
 
-            for (header in TABLE_HEADERS) {
-                val (name, width) = header
-                getColumn(name).preferredWidth = width
+            for (i in TABLE_HEADERS.indices) {
+                val (name, width) = TABLE_HEADERS[i]
+                getColumn(name).apply {
+                    if (COLUMN_PLATFORM_VERSION == i) {
+                        cellRenderer = LinkableLabelCellRenderer(androidApis.raw)
+                    }
+                    preferredWidth = width
+                }
             }
         }
         apiTable.onMouseClicked { e ->
@@ -93,12 +99,11 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
             if (COLUMN_PLATFORM_VERSION != table.selectedColumn) {
                  return@onMouseClicked
             }
-            val api = androidApis.items[table.selectedRow]
-            if (api.link != null) {
-                open(URL(api.link)).withError { notifyError(ERROR_LAUNCH_BROWSER) }
+            val api = androidApis[table.selectedRow]
+            api.link?.let {
+                open(URL(it)).withError { notifyError(ERROR_LAUNCH_BROWSER) }
             }
         }
-
     }
 }
 
@@ -114,14 +119,16 @@ private class ApiTableModel(columnNames: Array<String>, columnCount: Int)
 /**
  * @author kumagai
  */
-private class ApiLabelCellRenderer : DefaultTableCellRenderer() {
+private class LinkableLabelCellRenderer(private val apis: Array<AndroidApi>)
+        : DefaultTableCellRenderer() {
 
     override fun getTableCellRendererComponent(table: JTable, value: Any, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
         val label = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel
-        return if (column != COLUMN_PLATFORM_VERSION) label else label.apply {
-            if (label.text !in "<html>") {
-                label.text = underlineTextHtml(value)
+        return label.apply {
+            apis[row].link?.let {
+                text = linkTextHtml(text)
             }
+            //cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
         }
     }
 }
@@ -139,6 +146,12 @@ private fun AndroidApi.toArray() = arrayOf(
         versionCode
 )
 
+private inline fun Boolean.withError(handler: ()->Unit) {
+    if (this) {
+        handler()
+    }
+}
+
 private fun open(url: URL): Boolean {
     if (!Desktop.isDesktopSupported()) {
         return false
@@ -152,10 +165,4 @@ private fun open(url: URL): Boolean {
     }
 }
 
-private inline fun Boolean.withError(handler: ()->Unit) {
-    if (this) {
-        handler()
-    }
-}
-
-private fun underlineTextHtml(text: Any) = "<html><u>$text</u></html>"
+private fun linkTextHtml(text: Any, before: String="", after: String="") = "<html>$before<font color='#7d9ec9'><u>$text</u></font>$after</html>"

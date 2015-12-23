@@ -14,13 +14,16 @@ private const val PREFIX_ANDROID = "Android "
 /**
  * @author kumagai
  */
-data class AndroidApis(@Json(name = "apis") val items: Array<AndroidApi>)
+data class AndroidApis(@Json(name = "apis") val raw: Array<AndroidApi>)
 {
     // Sorted in descending order by Android version.
     val sortedNameMap: Map<String, List<AndroidApi>>
-        get() = items.groupBy { it.name }
+        get() = raw.groupBy { it.name }
 
-    val size: Int = items.size
+    val size: Int = raw.size
+
+    public final operator fun get(index: Int) = raw[index]
+    public final operator fun iterator(): Iterator<AndroidApi> = raw.iterator()
 }
 
 /**
