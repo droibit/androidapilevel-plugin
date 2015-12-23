@@ -19,11 +19,14 @@ import javax.swing.table.DefaultTableModel
 
 private const val COLUMN_PLATFORM_VERSION = 2
 
+private const val ERROR_JSON_PARSE = "Failed to read Anroid API data."
+private const val ERROR_LAUNCH_BROWSER = "Failed to launch browser."
+
 private val TABLE_HEADERS = arrayOf(
         Pair("Name", 150),
         Pair("Level", 50),
         Pair("Platform Version", 175),
-        Pair("Version Code", 200)
+        Pair("VERSION_CODE", 200)
 )
 private val LOGGER = Logger.getInstance(AndroidApiMapDialog::class.java.simpleName)
 
@@ -51,9 +54,8 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
             text = "${underlineTextHtml(url)}"
         }
         labelFooter.onMouseClicked {
-            open(url).withError {
-                // TODO: show notification
-            }
+            // FIXME:
+            open(url).withError { notifyError(ERROR_LAUNCH_BROWSER) }
         }
     }
 
@@ -61,7 +63,10 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
         AndroidApiReader.logger = LOGGER
 
         val jsonFile = jsonFile(ANDROID_API_JSON_PATH)
-        val androidApis = checkNotNull(readFromJson(jsonFile))
+        val androidApis = checkNotNull(readFromJson(jsonFile)) {
+            notifyError(ERROR_JSON_PARSE)
+            return
+        }
 
         val headers = TABLE_HEADERS.map { it.first }.toTypedArray()
         val tableModel = ApiTableModel(columnNames = headers,
@@ -80,7 +85,6 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
                 getColumn(name).preferredWidth = width
             }
         }
-
         apiTable.onMouseClicked { e ->
             if (e.clickCount < 2) {
                 return@onMouseClicked
@@ -91,9 +95,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
             }
             val api = androidApis.items[table.selectedRow]
             if (api.link != null) {
-                open(URL(api.link)).withError {
-                    // TODO: 通知の表示
-                }
+                open(URL(api.link)).withError { notifyError(ERROR_LAUNCH_BROWSER) }
             }
         }
 
@@ -138,7 +140,6 @@ private fun AndroidApi.toArray() = arrayOf(
 )
 
 private fun open(url: URL): Boolean {
-    // TODO: show notification.
     if (!Desktop.isDesktopSupported()) {
         return false
     }
