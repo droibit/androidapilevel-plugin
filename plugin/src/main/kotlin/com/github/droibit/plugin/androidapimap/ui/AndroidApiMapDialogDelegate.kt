@@ -165,4 +165,4 @@ private fun open(url: URL): Boolean {
     }
 }
 
-private fun linkTextHtml(text: Any, before: String="", after: String="") = "<html>$before<font color='#7d9ec9'><u>$text</u></font>$after</html>"
+private fun linkTextHtml(text: Any, before: String="", after: String="") = "<html>$before<font><u>$text</u></font>$after</html>"

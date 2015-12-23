@@ -22,7 +22,7 @@ public class AndroidApiMapDialog extends JDialog implements ActionListener {
 
         setContentPane(contentPane);
 
-        setModal(true);
+        //setModal(true);
         setLocationRelativeTo(null);
 
         setTitle("Android API Level");
