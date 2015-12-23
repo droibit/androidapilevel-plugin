@@ -11,7 +11,6 @@ import java.awt.Cursor
 import java.awt.Desktop
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
-import java.io.IOException
 import java.net.URL
 import javax.swing.JLabel
 import javax.swing.JTable
@@ -46,11 +45,16 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
     }
 
     private fun AndroidApiMapDialog.initFooter() {
-        labelFooter.cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)
-
         val url = URL(labelFooter.text)
-        labelFooter.text = "${underlineTextHtml(url)}"
-        labelFooter.onMouseClicked { open(url) }
+        labelFooter.apply {
+            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)
+            text = "${underlineTextHtml(url)}"
+        }
+        labelFooter.onMouseClicked {
+            open(url).withError {
+                // TODO: show notification
+            }
+        }
     }
 
     private fun AndroidApiMapDialog.initTable() {
@@ -76,15 +80,38 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
                 getColumn(name).preferredWidth = width
             }
         }
+
+        apiTable.onMouseClicked { e ->
+            if (e.clickCount < 2) {
+                return@onMouseClicked
+            }
+            val table = e.source as JTable
+            if (COLUMN_PLATFORM_VERSION != table.selectedColumn) {
+                 return@onMouseClicked
+            }
+            val api = androidApis.items[table.selectedRow]
+            if (api.link != null) {
+                open(URL(api.link)).withError {
+                    // TODO: 通知の表示
+                }
+            }
+        }
+
     }
 }
 
+/**
+ * @author kumagai
+ */
 private class ApiTableModel(columnNames: Array<String>, columnCount: Int)
         : DefaultTableModel(columnNames, columnCount) {
 
     override fun isCellEditable(row: Int, column: Int) = false
 }
 
+/**
+ * @author kumagai
+ */
 private class ApiLabelCellRenderer : DefaultTableCellRenderer() {
 
     override fun getTableCellRendererComponent(table: JTable, value: Any, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
@@ -97,9 +124,9 @@ private class ApiLabelCellRenderer : DefaultTableCellRenderer() {
     }
 }
 
-private inline fun JLabel.onMouseClicked(crossinline action: ()->Unit) {
+private inline fun Component.onMouseClicked(crossinline action: (e: MouseEvent)->Unit) {
     addMouseListener(object: MouseAdapter() {
-        override fun mouseClicked(e: MouseEvent?) { action() }
+        override fun mouseClicked(e: MouseEvent) { action(e) }
     })
 }
 
@@ -110,16 +137,23 @@ private fun AndroidApi.toArray() = arrayOf(
         versionCode
 )
 
-private fun open(url: URL) {
+private fun open(url: URL): Boolean {
     // TODO: show notification.
     if (!Desktop.isDesktopSupported()) {
-        return
+        return false
     }
-
-    try {
+    return try {
         Desktop.getDesktop().browse(url.toURI())
-    } catch (e: IOException) {
+        true
+    } catch (e: Exception) {
         LOGGER.error(e)
+        false
+    }
+}
+
+private inline fun Boolean.withError(handler: ()->Unit) {
+    if (this) {
+        handler()
     }
 }
 

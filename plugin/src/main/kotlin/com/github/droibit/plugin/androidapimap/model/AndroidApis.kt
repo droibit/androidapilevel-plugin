@@ -36,14 +36,12 @@ object AndroidApiReader {
     fun jsonFile(fileName: String): URL?
         = AndroidApiReader.javaClass.classLoader.getResource(fileName)
 
-    fun readFromJson(jsonUrl: URL?): AndroidApis? {
-        return try {
-            val json = File(jsonUrl?.toURI()).readText()
-            adapter.fromJson(json)
-        } catch (e: Exception) {
-            logger?.error("Json Parse Error", e)
-            null
-        }
+    fun readFromJson(jsonUrl: URL?) = try {
+        val json = File(jsonUrl?.toURI()).readText()
+        adapter.fromJson(json)
+    } catch (e: Exception) {
+        logger?.error("Json Parse Error", e)
+        null
     }
 }
 
