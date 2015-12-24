@@ -18,11 +18,11 @@ public class AndroidApiMapDialog extends JDialog implements ActionListener {
     private final AndroidApiMapDialogDelegate delegate;
 
     public AndroidApiMapDialog() {
-        setSize(585, 550);
+        setSize(600, 550);
 
         setContentPane(contentPane);
 
-        //setModal(true);
+        setModal(true);
         setLocationRelativeTo(null);
 
         setTitle("Android API Level");
@@ -34,6 +34,7 @@ public class AndroidApiMapDialog extends JDialog implements ActionListener {
                         WHEN_IN_FOCUSED_WINDOW);
 
         delegate = new AndroidApiMapDialogDelegate(this);
+        delegate.init();
     }
 
     /** {@inheritDoc} */

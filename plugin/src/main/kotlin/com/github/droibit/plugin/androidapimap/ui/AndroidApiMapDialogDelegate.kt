@@ -36,7 +36,7 @@ private val LOGGER = Logger.getInstance(AndroidApiMapDialog::class.java.simpleNa
  */
 class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
 
-    init {
+    fun init() {
         dialog.apply {
             initButtonOK()
             initFooter()
@@ -46,6 +46,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
 
     private fun AndroidApiMapDialog.initButtonOK() {
         buttonOK.addActionListener { dispose() }
+        buttonOK.requestFocus()
     }
 
     private fun AndroidApiMapDialog.initFooter() {
@@ -70,8 +71,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
         }
 
         val headers = TABLE_HEADERS.map { it.first }.toTypedArray()
-        val tableModel = ApiTableModel(columnNames = headers,
-                                       columnCount = androidApis.size).apply {
+        val tableModel = ApiTableModel(columnNames = headers).apply {
             for (api in androidApis) {
                 addRow(api.toArray())
             }
@@ -110,7 +110,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
 /**
  * @author kumagai
  */
-private class ApiTableModel(columnNames: Array<String>, columnCount: Int)
+private class ApiTableModel(columnNames: Array<String>, columnCount: Int = 0)
         : DefaultTableModel(columnNames, columnCount) {
 
     override fun isCellEditable(row: Int, column: Int) = false
@@ -122,7 +122,7 @@ private class ApiTableModel(columnNames: Array<String>, columnCount: Int)
 private class LinkableLabelCellRenderer(private val apis: Array<AndroidApi>)
         : DefaultTableCellRenderer() {
 
-    override fun getTableCellRendererComponent(table: JTable, value: Any, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
+    override fun getTableCellRendererComponent(table: JTable, value: Any?, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
         val label = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel
         return label.apply {
             apis[row].link?.let {
