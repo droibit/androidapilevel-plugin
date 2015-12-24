@@ -20,7 +20,8 @@ data class AndroidApis(@Json(name = "apis") val raw: Array<AndroidApi>)
     val sortedNameMap: Map<String, List<AndroidApi>>
         get() = raw.groupBy { it.name }
 
-    val size: Int = raw.size
+    val size: Int
+        get() = raw.size
 
     public final operator fun get(index: Int) = raw[index]
     public final operator fun iterator(): Iterator<AndroidApi> = raw.iterator()

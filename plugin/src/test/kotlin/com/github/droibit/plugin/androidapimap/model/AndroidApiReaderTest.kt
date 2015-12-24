@@ -26,14 +26,12 @@ class AndroidApiReaderTest {
         val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))
 
         assertThat(androidApis, `is`(notNullValue()))
-
-        val apis = checkNotNull(androidApis)
-        assertThat(apis.raw.size, `is`(23))
+        assertThat(androidApis!!.raw.size, `is`(23))
     }
 
     @Test
     fun checkAndroidName() {
-        val apis = checkNotNull(AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH)))
+        val apis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
         val androidNames = arrayOf(
                 "Marshmallow",
                 "Lollipop",
@@ -50,16 +48,15 @@ class AndroidApiReaderTest {
         )
 
         val readAndroidNames = apis.sortedNameMap.keys
-        assertThat(readAndroidNames, not(empty()))
+        //assertThat(readAndroidNames, not(empty()))
         assertThat(readAndroidNames, contains(*androidNames))
     }
 
     @Test
     fun checkApiLevels() {
-        val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))
+        val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
 
-        val apis = checkNotNull(androidApis?.raw)
-        val reversedApis = apis.map { it.apiLevel }.reversed() // e.g. 23 .. 1 => 1 .. 23
+        val reversedApis = androidApis.raw.map { it.apiLevel }.reversed() // e.g. 23 .. 1 => 1 .. 23
         for (i in reversedApis.indices) {
             assertThat(i+1, `is`(reversedApis[i]))
         }
