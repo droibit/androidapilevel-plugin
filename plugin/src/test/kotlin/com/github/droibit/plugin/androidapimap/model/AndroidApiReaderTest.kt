@@ -4,7 +4,6 @@ import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.jsonFile
 import org.junit.Assert.*
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Matchers.contains
-import org.hamcrest.Matchers.empty
 import org.junit.Test
 import java.io.File
 

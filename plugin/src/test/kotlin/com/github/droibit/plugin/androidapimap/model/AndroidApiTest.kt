@@ -1,10 +1,8 @@
 package com.github.droibit.plugin.androidapimap.model
 
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
+import com.google.gson.Gson
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Test
 
 /**
@@ -12,13 +10,7 @@ import org.junit.Test
  */
 class AndroidApiTest {
 
-    private lateinit var adapter: JsonAdapter<AndroidApi>
-
-    @Before
-    fun setup() {
-        adapter = Moshi.Builder().build()
-                    .adapter(AndroidApi::class.java)
-    }
+    private val gson = Gson()
 
     @Test
     fun parseFromJson() {
@@ -32,7 +24,7 @@ class AndroidApiTest {
                   "versionCode": "M"
                 }
                 """
-        val api = adapter.fromJson(marshmallowJson)
+        val api = gson.fromJson(marshmallowJson, AndroidApi::class.java)
 
         assertThat(api, `is`(notNullValue()))
         assertThat(api.apiLevel, `is`(23))
@@ -50,7 +42,7 @@ class AndroidApiTest {
                   "platformVersions": ["4.0", "4.0.1", "4.0.2"]
                 }
                 """
-        val api = adapter.fromJson(multiPlatformVersions)
+        val api = gson.fromJson(multiPlatformVersions, AndroidApi::class.java)
 
         assertThat(api, `is`(notNullValue()))
         assertThat(api.platformVersion, `is`(equalTo("Android 4.0, 4.0.1, 4.0.2")))
@@ -67,7 +59,7 @@ class AndroidApiTest {
                   "versionCode": "BASE"
                 }
                 """
-        val api = adapter.fromJson(notHasLink)
+        val api = gson.fromJson(notHasLink, AndroidApi::class.java)
 
         assertThat(api, `is`(notNullValue()))
         assertThat(api.link.isNullOrEmpty(), `is`(true))

@@ -1,9 +1,8 @@
 package com.github.droibit.plugin.androidapimap.model
 
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.intellij.openapi.diagnostic.Logger
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
 import java.io.File
 import java.net.URL
 
@@ -14,7 +13,7 @@ private const val PREFIX_ANDROID = "Android "
 /**
  * @author kumagai
  */
-data class AndroidApis(@Json(name = "apis") val raw: Array<AndroidApi>)
+data class AndroidApis(@SerializedName("apis") val raw: Array<AndroidApi>)
 {
     // Sorted in descending order by Android version.
     val sortedNameMap: Map<String, List<AndroidApi>>
@@ -25,28 +24,6 @@ data class AndroidApis(@Json(name = "apis") val raw: Array<AndroidApi>)
 
     public final operator fun get(index: Int) = raw[index]
     public final operator fun iterator(): Iterator<AndroidApi> = raw.iterator()
-}
-
-/**
- * @author kumagai
- */
-object AndroidApiReader {
-
-    private val adapter: JsonAdapter<AndroidApis> by lazy {
-        Moshi.Builder().build().adapter(AndroidApis::class.java)
-    }
-    var logger: Logger? = null
-
-    fun jsonFile(fileName: String): URL?
-        = AndroidApiReader.javaClass.classLoader.getResource(fileName)
-
-    fun readFromJson(jsonUrl: URL?) = try {
-        val json = File(jsonUrl?.toURI()).readText()
-        adapter.fromJson(json)
-    } catch (e: Exception) {
-        logger?.error("Json Parse Error", e)
-        null
-    }
 }
 
 /**
@@ -71,4 +48,25 @@ data class AndroidApi(
             append(PREFIX_ANDROID)
             platformVersions.joinTo(this)
         }
+}
+
+/**
+ * @author kumagai
+ */
+object AndroidApiReader {
+
+    private val gson = Gson()
+
+    var logger: Logger? = null
+
+    fun jsonFile(fileName: String): URL?
+            = AndroidApiReader.javaClass.classLoader.getResource(fileName)
+
+    fun readFromJson(jsonUrl: URL?) = try {
+        val json = File(jsonUrl?.toURI()).readText()
+        gson.fromJson(json, AndroidApis::class.java)
+    } catch (e: Exception) {
+        logger?.error("Json Parse Error", e)
+        null
+    }
 }

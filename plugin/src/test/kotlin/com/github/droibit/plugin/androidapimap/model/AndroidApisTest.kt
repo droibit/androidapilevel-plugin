@@ -1,7 +1,6 @@
 package com.github.droibit.plugin.androidapimap.model
 
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
+import com.google.gson.Gson
 import org.junit.Assert.*
 import org.hamcrest.CoreMatchers.*
 import org.junit.Test
@@ -33,12 +32,11 @@ private const val JSON =
  */
 class AndroidApisTest {
 
-    private val adapter: JsonAdapter<AndroidApis> =
-            Moshi.Builder().build().adapter(AndroidApis::class.java)
+    private val gson = Gson()
 
     @Test
     fun itemSize() {
-        val apis = adapter.fromJson(JSON)!!
+        val apis = gson.fromJson(JSON, AndroidApis::class.java)!!
 
         assertThat(apis.size, `is`(2))
         assertThat(apis.size, `is`(apis.raw.size))
@@ -46,7 +44,7 @@ class AndroidApisTest {
 
     @Test
     fun operatorGet() {
-        val apis = adapter.fromJson(JSON)!!
+        val apis = gson.fromJson(JSON, AndroidApis::class.java)!!
 
         assertThat(apis[0], `is`(sameInstance(apis.raw[0])))
         assertThat(apis[1], `is`(sameInstance(apis.raw[1])))
