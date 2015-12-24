@@ -23,7 +23,7 @@ data class AndroidApis(@SerializedName("apis") val raw: Array<AndroidApi>)
         get() = raw.size
 
     public final operator fun get(index: Int) = raw[index]
-    public final operator fun iterator(): Iterator<AndroidApi> = raw.iterator()
+    public final operator fun iterator() = raw.iterator()
 }
 
 /**
