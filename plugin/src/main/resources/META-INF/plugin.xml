@@ -35,8 +35,9 @@
         <action id="ShowAndroidApiMapAction"
                 class="com.github.droibit.plugin.androidapimap.ShowAndroidApiMapAction"
                 text="Android API Level"
-                description="Display Android API level and version name">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+                description="Display Android API level and version name"
+                icon="/icons/icon.png">
+            <add-to-group group-id="MainToolBar" anchor="last"/>
             <!--<add-to-group group-id="MainToolBar" anchor="last"/>-->
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V"/>
         </action>
