@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.github.droibit.plugin.androidapimap.util.Strings.getStringBundle;
 import static java.awt.event.KeyEvent.VK_ESCAPE;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
@@ -12,7 +13,6 @@ public class AndroidApiMapDialog extends JDialog implements ActionListener {
     private JPanel contentPane;
     private JButton buttonOK;
     private JTable apiTable;
-
     private JLabel labelFooter;
 
     private final AndroidApiMapDialogDelegate delegate;
@@ -25,7 +25,7 @@ public class AndroidApiMapDialog extends JDialog implements ActionListener {
         setModal(true);
         setLocationRelativeTo(null);
 
-        setTitle("Android API Level");
+        setTitle(getStringBundle().getTitleAndroidApiMapDialog());
 
         getRootPane().setDefaultButton(buttonOK);
         getRootPane().registerKeyboardAction(
