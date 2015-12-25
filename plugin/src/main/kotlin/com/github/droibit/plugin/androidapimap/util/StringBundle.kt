@@ -19,12 +19,14 @@ class StringBundle(private val stringMap: Map<String, String>) {
     val headerVersionCode by stringMap
     val jsonPathAndroidApi by stringMap
     val titleAndroidApiMapDialog by stringMap
+    val notificationErrorGroup by stringMap
+    val notificationErrorTitle by stringMap
 
     val size: Int
         get() = stringMap.size
 }
 
-fun bundleAsMap(propPath: String): Map<String, String> {
+internal fun bundleAsMap(propPath: String): Map<String, String> {
     return ResourceBundle.getBundle(propPath).run {
         keys.asSequence().toMap { it to getString(it) }
     }
