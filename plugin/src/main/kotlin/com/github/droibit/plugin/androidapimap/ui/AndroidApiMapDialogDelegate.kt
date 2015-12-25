@@ -4,7 +4,7 @@ import com.github.droibit.plugin.androidapimap.model.AndroidApi
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.jsonFile
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.readFromJson
-import com.github.droibit.plugin.androidapimap.util.STRINGS
+import com.github.droibit.plugin.androidapimap.util.stringBundle
 import com.intellij.openapi.diagnostic.Logger
 import java.awt.Component
 import java.awt.Cursor
@@ -21,10 +21,10 @@ import javax.swing.table.DefaultTableModel
 private const val COLUMN_PLATFORM_VERSION = 2
 
 private val TABLE_HEADERS = arrayOf(
-        STRINGS.headerName to 150,
-        STRINGS.headerLevel to 50,
-        STRINGS.headerPlatformVersion to 175,
-        STRINGS.headerVersionCode to 200
+        stringBundle.headerName to 150,
+        stringBundle.headerLevel to 50,
+        stringBundle.headerPlatformVersion to 175,
+        stringBundle.headerVersionCode to 200
 )
 private val LOGGER = Logger.getInstance(AndroidApiMapDialog::class.java.simpleName)
 
@@ -54,16 +54,16 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
         }
         labelFooter.onMouseClicked {
             // FIXME:
-            open(url).withError { notifyError(STRINGS.errorLaunchBrowser) }
+            open(url).withError { notifyError(stringBundle.errorLaunchBrowser) }
         }
     }
 
     private fun AndroidApiMapDialog.initTable() {
         AndroidApiReader.logger = LOGGER
 
-        val jsonFile = jsonFile(STRINGS.jsonPathAndroidApi)
+        val jsonFile = jsonFile(stringBundle.jsonPathAndroidApi)
         val androidApis = checkNotNull(readFromJson(jsonFile)) {
-            notifyError(STRINGS.errorJsonParse)
+            notifyError(stringBundle.errorJsonParse)
             return
         }
 
@@ -98,7 +98,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
             }
             val api = androidApis[table.selectedRow]
             api.link?.let {
-                open(URL(it)).withError { notifyError(STRINGS.errorLaunchBrowser) }
+                open(URL(it)).withError { notifyError(stringBundle.errorLaunchBrowser) }
             }
         }
     }

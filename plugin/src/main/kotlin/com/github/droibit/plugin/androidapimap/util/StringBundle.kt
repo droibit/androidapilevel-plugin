@@ -1,13 +1,15 @@
+@file:JvmName("Strings")
+
 package com.github.droibit.plugin.androidapimap.util
 
 import java.util.*
 
-val STRINGS: Strings by lazy { Strings(bundleAsMap("strings/strings")) }
+val stringBundle: StringBundle by lazy { StringBundle(bundleAsMap("strings/strings")) }
 
 /**
  * @author kumagai
  */
-class Strings(private val stringMap: Map<String, String>) {
+class StringBundle(private val stringMap: Map<String, String>) {
 
     val errorJsonParse by stringMap
     val errorLaunchBrowser by stringMap
@@ -16,6 +18,7 @@ class Strings(private val stringMap: Map<String, String>) {
     val headerPlatformVersion by stringMap
     val headerVersionCode by stringMap
     val jsonPathAndroidApi by stringMap
+    val titleAndroidApiMapDialog by stringMap
 
     val size: Int
         get() = stringMap.size

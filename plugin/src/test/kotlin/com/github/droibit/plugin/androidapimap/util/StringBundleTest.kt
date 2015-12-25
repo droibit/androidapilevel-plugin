@@ -7,11 +7,11 @@ import org.hamcrest.CoreMatchers.*
 /**
  * @author kumagai
  */
-class StringsTest {
+class StringBundleTest {
 
     @Test
     fun readStringsProperties() {
-        val strings = Strings(bundleAsMap("strings"))
+        val strings = StringBundle(bundleAsMap("strings"))
 
         assertThat(strings, `is`(notNullValue()))
         assertThat(strings.size, `is`(2))
