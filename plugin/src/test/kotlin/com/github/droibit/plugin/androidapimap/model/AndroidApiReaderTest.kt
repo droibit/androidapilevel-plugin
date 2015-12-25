@@ -7,6 +7,8 @@ import org.hamcrest.Matchers.contains
 import org.junit.Test
 import java.io.File
 
+private val ANDROID_API_JSON_PATH = "AndroidAPIs.json"
+
 /**
  * @author kumagai
  */
