@@ -35,15 +35,16 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
 
     fun init() {
         dialog.apply {
-            initButtonOK()
+            initAppearance()
             initFooter()
             initTable()
         }
     }
 
-    private fun AndroidApiMapDialog.initButtonOK() {
-        buttonOK.addActionListener { dispose() }
-        buttonOK.requestFocus()
+    private fun AndroidApiMapDialog.initAppearance() {
+        setSize(600, 550)
+        title = stringBundle.titleAndroidApiMapDialog
+        isModal = true
     }
 
     private fun AndroidApiMapDialog.initFooter() {
@@ -53,7 +54,6 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
             text = "${linkTextHtml(before="From: ",text=url)}"
         }
         labelFooter.onMouseClicked {
-            // FIXME:
             open(url).withError { notifyError(stringBundle.errorLaunchBrowser) }
         }
     }
@@ -144,7 +144,7 @@ private fun AndroidApi.toArray() = arrayOf(
 )
 
 private inline fun Boolean.withError(handler: ()->Unit) {
-    if (this) {
+    if (!this) {
         handler()
     }
 }

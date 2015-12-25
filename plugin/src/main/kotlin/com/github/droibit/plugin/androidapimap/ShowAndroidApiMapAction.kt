@@ -10,8 +10,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 class ShowAndroidApiMapAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
-        AndroidApiMapDialog().apply {
-            isVisible = true
-        }
+        AndroidApiMapDialog().show()
     }
 }
