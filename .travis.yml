@@ -5,7 +5,7 @@ env:
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
 
 script:
-  - ./gradlew :plugin:test check --info
+  - ./gradlew :plugin:test --info
 
 branches:
   only:
