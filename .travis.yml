@@ -1,0 +1,17 @@
+language: java
+
+env:
+  global:
+    - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+
+script:
+  - ./gradlew clean check --info
+
+branches:
+  only:
+    - develop
+
+notifications:
+  email: false
+
+sudo: false
