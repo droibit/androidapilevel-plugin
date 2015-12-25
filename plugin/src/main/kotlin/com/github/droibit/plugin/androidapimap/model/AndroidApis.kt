@@ -6,8 +6,6 @@ import com.intellij.openapi.diagnostic.Logger
 import java.io.File
 import java.net.URL
 
-public const val ANDROID_API_JSON_PATH = "AndroidAPIs.json"
-
 private const val PREFIX_ANDROID = "Android "
 
 /**

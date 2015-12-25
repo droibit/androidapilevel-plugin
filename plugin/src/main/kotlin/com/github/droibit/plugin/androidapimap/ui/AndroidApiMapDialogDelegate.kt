@@ -1,10 +1,10 @@
 package com.github.droibit.plugin.androidapimap.ui
 
-import com.github.droibit.plugin.androidapimap.model.ANDROID_API_JSON_PATH
 import com.github.droibit.plugin.androidapimap.model.AndroidApi
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.jsonFile
 import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.readFromJson
+import com.github.droibit.plugin.androidapimap.util.STRINGS
 import com.intellij.openapi.diagnostic.Logger
 import java.awt.Component
 import java.awt.Cursor
@@ -20,14 +20,11 @@ import javax.swing.table.DefaultTableModel
 
 private const val COLUMN_PLATFORM_VERSION = 2
 
-private const val ERROR_JSON_PARSE = "Failed to read Anroid API data."
-private const val ERROR_LAUNCH_BROWSER = "Failed to launch browser."
-
 private val TABLE_HEADERS = arrayOf(
-        Pair("Name", 150),
-        Pair("Level", 50),
-        Pair("Platform Version", 175),
-        Pair("VERSION_CODE", 200)
+        STRINGS.headerName to 150,
+        STRINGS.headerLevel to 50,
+        STRINGS.headerPlatformVersion to 175,
+        STRINGS.headerVersionCode to 200
 )
 private val LOGGER = Logger.getInstance(AndroidApiMapDialog::class.java.simpleName)
 
@@ -57,16 +54,16 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
         }
         labelFooter.onMouseClicked {
             // FIXME:
-            open(url).withError { notifyError(ERROR_LAUNCH_BROWSER) }
+            open(url).withError { notifyError(STRINGS.errorLaunchBrowser) }
         }
     }
 
     private fun AndroidApiMapDialog.initTable() {
         AndroidApiReader.logger = LOGGER
 
-        val jsonFile = jsonFile(ANDROID_API_JSON_PATH)
+        val jsonFile = jsonFile(STRINGS.jsonPathAndroidApi)
         val androidApis = checkNotNull(readFromJson(jsonFile)) {
-            notifyError(ERROR_JSON_PARSE)
+            notifyError(STRINGS.errorJsonParse)
             return
         }
 
@@ -101,7 +98,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
             }
             val api = androidApis[table.selectedRow]
             api.link?.let {
-                open(URL(it)).withError { notifyError(ERROR_LAUNCH_BROWSER) }
+                open(URL(it)).withError { notifyError(STRINGS.errorLaunchBrowser) }
             }
         }
     }

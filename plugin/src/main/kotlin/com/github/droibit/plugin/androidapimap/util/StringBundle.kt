@@ -2,27 +2,28 @@ package com.github.droibit.plugin.androidapimap.util
 
 import java.util.*
 
-
-val STRINGS: Strings by lazy { Strings(bundleAsMap("strings")) }
+val STRINGS: Strings by lazy { Strings(bundleAsMap("strings/strings")) }
 
 /**
- * Created by kumagai on 2015/12/24.
+ * @author kumagai
  */
+class Strings(private val stringMap: Map<String, String>) {
 
-class Strings(private val stringRes: Map<String, String>) {
-
-    val errorJsonParse by stringRes
-    val errorLaunchBrowser by stringRes
+    val errorJsonParse by stringMap
+    val errorLaunchBrowser by stringMap
+    val headerName by stringMap
+    val headerLevel by stringMap
+    val headerPlatformVersion by stringMap
+    val headerVersionCode by stringMap
+    val jsonPathAndroidApi by stringMap
 
     val size: Int
-        get() = stringRes.size
+        get() = stringMap.size
 }
 
-fun bundleAsMap(propName: String): Map<String, String> {
-    val props = ResourceBundle.getBundle(propName)
-    val map = HashMap<String, String>()
-    for (key in props.keys) {
-        map.put(key, props.getString(key))
+fun bundleAsMap(propPath: String): Map<String, String> {
+    return ResourceBundle.getBundle(propPath).run {
+        keys.asSequence().toMap { it to getString(it) }
     }
-    return map
+
 }
