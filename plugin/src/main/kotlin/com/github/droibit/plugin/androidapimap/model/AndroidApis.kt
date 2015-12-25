@@ -11,8 +11,8 @@ private const val PREFIX_ANDROID = "Android "
 /**
  * @author kumagai
  */
-data class AndroidApis(@SerializedName("apis") val raw: Array<AndroidApi>)
-{
+data class AndroidApis(@SerializedName("apis") val raw: Array<AndroidApi>) {
+
     // Sorted in descending order by Android version.
     val sortedNameMap: Map<String, List<AndroidApi>>
         get() = raw.groupBy { it.name }

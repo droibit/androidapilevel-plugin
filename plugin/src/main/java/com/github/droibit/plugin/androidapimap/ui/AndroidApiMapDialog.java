@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * http://www.jetbrains.org/intellij/sdk/docs/user_interface_components/dialog_wrapper.html
+ * [DialogWrapper](http://www.jetbrains.org/intellij/sdk/docs/user_interface_components/dialog_wrapper.html)
  */
 public class AndroidApiMapDialog extends DialogWrapper {
 
@@ -14,13 +14,10 @@ public class AndroidApiMapDialog extends DialogWrapper {
     private JTable apiTable;
     private JLabel labelFooter;
 
-    private final AndroidApiMapDialogDelegate delegate;
-
     public AndroidApiMapDialog() {
         super(true);
 
-        delegate = new AndroidApiMapDialogDelegate(this);
-        delegate.init();
+        AndroidApiMapDialogDelegate.init(this);
 
         init();
     }

@@ -1,3 +1,5 @@
+@file:JvmName("AndroidApiMapDialogDelegate")
+
 package com.github.droibit.plugin.androidapimap.ui
 
 import com.github.droibit.plugin.androidapimap.model.AndroidApi
@@ -31,84 +33,8 @@ private val logger = Logger.getInstance(AndroidApiMapDialog::class.java.simpleNa
 /**
  * @author kumagai
  */
-class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
-
-    fun init() {
-        dialog.apply {
-            initAppearance()
-            initFooter()
-            initTable()
-        }
-    }
-
-    private fun AndroidApiMapDialog.initAppearance() {
-        setSize(600, 550)
-        title = stringBundle.titleAndroidApiMapDialog
-        isModal = true
-    }
-
-    private fun AndroidApiMapDialog.initFooter() {
-        val url = URL(labelFooter.text)
-        labelFooter.apply {
-            cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
-            text = "${linkTextHtml(before="From: ",text=url)}"
-        }
-        labelFooter.onMouseClicked {
-            open(url).withError { notifyError(stringBundle.errorLaunchBrowser) }
-        }
-    }
-
-    private fun AndroidApiMapDialog.initTable() {
-        AndroidApiReader.logger = logger
-
-        val jsonFile = jsonFile(stringBundle.jsonPathAndroidApi)
-        val androidApis = checkNotNull(readFromJson(jsonFile)) {
-            notifyError(stringBundle.errorJsonParse)
-            return
-        }
-
-        val headers = TABLE_HEADERS.map { it.first }.toTypedArray()
-        val tableModel = ApiTableModel(columnNames = headers).apply {
-            for (api in androidApis) {
-                addRow(api.toArray())
-            }
-        }
-
-        apiTable.apply {
-            model = tableModel
-            setShowGrid(false)
-
-            for (i in TABLE_HEADERS.indices) {
-                val (name, width) = TABLE_HEADERS[i]
-                getColumn(name).apply {
-                    if (COLUMN_PLATFORM_VERSION == i) {
-                        cellRenderer = LinkableLabelCellRenderer(androidApis.raw)
-                    }
-                    preferredWidth = width
-                }
-            }
-        }
-        apiTable.onMouseClicked { e ->
-            if (e.clickCount < 2) {
-                return@onMouseClicked
-            }
-            val table = e.source as JTable
-            if (COLUMN_PLATFORM_VERSION != table.selectedColumn) {
-                 return@onMouseClicked
-            }
-            val api = androidApis[table.selectedRow]
-            api.link?.let {
-                open(URL(it)).withError { notifyError(stringBundle.errorLaunchBrowser) }
-            }
-        }
-    }
-}
-
-/**
- * @author kumagai
- */
 private class ApiTableModel(columnNames: Array<String>, columnCount: Int = 0)
-        : DefaultTableModel(columnNames, columnCount) {
+    : DefaultTableModel(columnNames, columnCount) {
 
     override fun isCellEditable(row: Int, column: Int) = false
 }
@@ -117,7 +43,7 @@ private class ApiTableModel(columnNames: Array<String>, columnCount: Int = 0)
  * @author kumagai
  */
 private class LinkableLabelCellRenderer(private val apis: Array<AndroidApi>)
-        : DefaultTableCellRenderer() {
+    : DefaultTableCellRenderer() {
 
     override fun getTableCellRendererComponent(table: JTable, value: Any?, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
         val label = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel
@@ -126,6 +52,76 @@ private class LinkableLabelCellRenderer(private val apis: Array<AndroidApi>)
                 text = linkTextHtml(text)
             }
             //cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
+        }
+    }
+}
+
+fun init(dialog: AndroidApiMapDialog) {
+    dialog.apply {
+        initAppearance()
+        initFooter()
+        initTable()
+    }
+}
+
+private fun AndroidApiMapDialog.initAppearance() {
+    setSize(600, 550)
+    title = stringBundle.titleAndroidApiMapDialog
+    isModal = true
+}
+
+private fun AndroidApiMapDialog.initFooter() {
+    val url = URL(labelFooter.text)
+    labelFooter.apply {
+        cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
+        text = "${linkTextHtml(before="From: ",text=url)}"
+    }
+    labelFooter.onMouseClicked {
+        open(url).withError { notifyError(stringBundle.errorLaunchBrowser) }
+    }
+}
+
+private fun AndroidApiMapDialog.initTable() {
+    AndroidApiReader.logger = logger
+
+    val jsonFile = jsonFile(stringBundle.jsonPathAndroidApi)
+    val androidApis = checkNotNull(readFromJson(jsonFile)) {
+        notifyError(stringBundle.errorJsonParse)
+        return
+    }
+
+    val headers = TABLE_HEADERS.map { it.first }.toTypedArray()
+    val tableModel = ApiTableModel(columnNames = headers).apply {
+        for (api in androidApis) {
+            addRow(api.toArray())
+        }
+    }
+
+    apiTable.apply {
+        model = tableModel
+        setShowGrid(false)
+
+        for (i in TABLE_HEADERS.indices) {
+            val (name, width) = TABLE_HEADERS[i]
+            getColumn(name).apply {
+                if (COLUMN_PLATFORM_VERSION == i) {
+                    cellRenderer = LinkableLabelCellRenderer(androidApis.raw)
+                }
+                preferredWidth = width
+            }
+        }
+    }
+    apiTable.onMouseClicked { e ->
+        if (e.clickCount < 2) {
+            return@onMouseClicked
+        }
+        val table = e.source as JTable
+        if (COLUMN_PLATFORM_VERSION != table.selectedColumn) {
+            return@onMouseClicked
+        }
+        val api = androidApis[table.selectedRow]
+        api.link?.let {
+            open(URL(it)).withError { notifyError(stringBundle.errorLaunchBrowser) }
         }
     }
 }
