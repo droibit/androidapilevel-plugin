@@ -20,8 +20,8 @@ data class AndroidApis(@SerializedName("apis") val raw: Array<AndroidApi>)
     val size: Int
         get() = raw.size
 
-    public final operator fun get(index: Int) = raw[index]
-    public final operator fun iterator() = raw.iterator()
+    final operator fun get(index: Int) = raw[index]
+    final operator fun iterator() = raw.iterator()
 }
 
 /**
@@ -57,7 +57,7 @@ object AndroidApiReader {
 
     var logger: Logger? = null
 
-    fun jsonFile(fileName: String): URL?
+    internal fun jsonFile(fileName: String): URL?
             = AndroidApiReader.javaClass.classLoader.getResource(fileName)
 
     fun readFromJson(jsonUrl: URL?) = try {

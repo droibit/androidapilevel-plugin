@@ -26,7 +26,7 @@ private val TABLE_HEADERS = arrayOf(
         stringBundle.headerPlatformVersion to 175,
         stringBundle.headerVersionCode to 200
 )
-private val LOGGER = Logger.getInstance(AndroidApiMapDialog::class.java.simpleName)
+private val logger = Logger.getInstance(AndroidApiMapDialog::class.java.simpleName)
 
 /**
  * @author kumagai
@@ -59,7 +59,7 @@ class AndroidApiMapDialogDelegate(private val dialog: AndroidApiMapDialog) {
     }
 
     private fun AndroidApiMapDialog.initTable() {
-        AndroidApiReader.logger = LOGGER
+        AndroidApiReader.logger = logger
 
         val jsonFile = jsonFile(stringBundle.jsonPathAndroidApi)
         val androidApis = checkNotNull(readFromJson(jsonFile)) {
@@ -157,7 +157,7 @@ private fun open(url: URL): Boolean {
         Desktop.getDesktop().browse(url.toURI())
         true
     } catch (e: Exception) {
-        LOGGER.error(e)
+        logger.error(e)
         false
     }
 }
