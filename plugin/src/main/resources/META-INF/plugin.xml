@@ -1,6 +1,6 @@
 <idea-plugin version="2">
     <id>com.github.droibit.plugin.androidapilevel</id>
-    <name>Android API Map</name>
+    <name>Android API Level</name>
     <version>0.1.0</version>
     <vendor email="roomful.rooms@gmail.com" url="https://github.com/droibit">Shinya Kumagai</vendor>
 
