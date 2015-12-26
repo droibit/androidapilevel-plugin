@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-    <id>com.github.droibit.plugin.androidapimap</id>
+    <id>com.github.droibit.plugin.androidapilevel</id>
     <name>Android API Map</name>
     <version>0.1.0</version>
     <vendor email="roomful.rooms@gmail.com" url="https://github.com/droibit">Shinya Kumagai</vendor>
@@ -32,8 +32,8 @@
     </project-components>
 
     <actions>
-        <action id="ShowAndroidApiMapAction"
-                class="com.github.droibit.plugin.androidapimap.ShowAndroidApiMapAction"
+        <action id="ShowAndroidLevelAction"
+                class="com.github.droibit.plugin.androidapilevel.ShowAndroidApiLevelAction"
                 text="Android API Level"
                 description="Display Android API level and version name"
                 icon="/icons/icon.png">

@@ -7,7 +7,7 @@ apply plugin: 'kotlin'
 
 intellij {
     version '14.1.5'
-    pluginName 'androidapimap-plugin'
+    pluginName 'androidapilevel-plugin'
     plugins 'android'
     updateSinceUntilBuild false
 }

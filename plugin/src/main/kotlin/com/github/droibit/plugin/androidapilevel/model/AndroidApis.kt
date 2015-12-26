@@ -1,4 +1,4 @@
-package com.github.droibit.plugin.androidapimap.model
+package com.github.droibit.plugin.androidapilevel.model
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
@@ -58,7 +58,7 @@ object AndroidApiReader {
     var logger: Logger? = null
 
     internal fun jsonFile(fileName: String): URL?
-            = AndroidApiReader.javaClass.classLoader.getResource(fileName)
+            = javaClass.classLoader.getResource(fileName)
 
     fun readFromJson(jsonUrl: URL?) = try {
         val json = File(jsonUrl?.toURI()).readText()

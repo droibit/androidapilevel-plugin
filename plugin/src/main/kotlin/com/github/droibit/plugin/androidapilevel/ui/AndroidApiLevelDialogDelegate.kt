@@ -1,12 +1,12 @@
-@file:JvmName("AndroidApiMapDialogDelegate")
+@file:JvmName("AndroidApiLevelDialogDelegate")
 
-package com.github.droibit.plugin.androidapimap.ui
+package com.github.droibit.plugin.androidapilevel.ui
 
-import com.github.droibit.plugin.androidapimap.model.AndroidApi
-import com.github.droibit.plugin.androidapimap.model.AndroidApiReader
-import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.jsonFile
-import com.github.droibit.plugin.androidapimap.model.AndroidApiReader.readFromJson
-import com.github.droibit.plugin.androidapimap.util.stringBundle
+import com.github.droibit.plugin.androidapilevel.model.AndroidApi
+import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader
+import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFile
+import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.readFromJson
+import com.github.droibit.plugin.androidapilevel.util.stringBundle
 import com.intellij.openapi.diagnostic.Logger
 import java.awt.Component
 import java.awt.Cursor
@@ -28,7 +28,7 @@ private val TABLE_HEADERS = arrayOf(
         stringBundle.headerPlatformVersion to 175,
         stringBundle.headerVersionCode to 200
 )
-private val logger = Logger.getInstance(AndroidApiMapDialog::class.java.simpleName)
+private val logger = Logger.getInstance(AndroidApiLevelDialog::class.java.simpleName)
 
 /**
  * @author kumagai
@@ -56,7 +56,7 @@ private class LinkableLabelCellRenderer(private val apis: Array<AndroidApi>)
     }
 }
 
-fun init(dialog: AndroidApiMapDialog) {
+fun init(dialog: AndroidApiLevelDialog) {
     dialog.apply {
         initAppearance()
         initFooter()
@@ -64,24 +64,24 @@ fun init(dialog: AndroidApiMapDialog) {
     }
 }
 
-private fun AndroidApiMapDialog.initAppearance() {
+private fun AndroidApiLevelDialog.initAppearance() {
     setSize(600, 550)
-    title = stringBundle.titleAndroidApiMapDialog
+    title = stringBundle.titleAndroidApiLevelDialog
     isModal = true
 }
 
-private fun AndroidApiMapDialog.initFooter() {
+private fun AndroidApiLevelDialog.initFooter() {
     val url = URL(labelFooter.text)
     labelFooter.apply {
         cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
-        text = "${linkTextHtml(before="From: ",text=url)}"
+        text = "${linkTextHtml(before = "From: ", text = url)}"
     }
     labelFooter.onMouseClicked {
         open(url).withError { notifyError(stringBundle.errorLaunchBrowser) }
     }
 }
 
-private fun AndroidApiMapDialog.initTable() {
+private fun AndroidApiLevelDialog.initTable() {
     AndroidApiReader.logger = logger
 
     val jsonFile = jsonFile(stringBundle.jsonPathAndroidApi)

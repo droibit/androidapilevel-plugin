@@ -1,8 +1,9 @@
-package com.github.droibit.plugin.androidapimap.util
+package com.github.droibit.plugin.androidapilevel.util
 
-import org.junit.Assert.*
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.notNullValue
+import org.junit.Assert.assertThat
 import org.junit.Test
-import org.hamcrest.CoreMatchers.*
 
 /**
  * @author kumagai

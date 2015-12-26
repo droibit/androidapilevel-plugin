@@ -1,4 +1,4 @@
-package com.github.droibit.plugin.androidapimap.ui;
+package com.github.droibit.plugin.androidapilevel.ui;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.Nullable;
@@ -8,16 +8,16 @@ import javax.swing.*;
 /**
  * [DialogWrapper](http://www.jetbrains.org/intellij/sdk/docs/user_interface_components/dialog_wrapper.html)
  */
-public class AndroidApiMapDialog extends DialogWrapper {
+public class AndroidApiLevelDialog extends DialogWrapper {
 
     private JPanel contentPane;
     private JTable apiTable;
     private JLabel labelFooter;
 
-    public AndroidApiMapDialog() {
+    public AndroidApiLevelDialog() {
         super(true);
 
-        AndroidApiMapDialogDelegate.init(this);
+        AndroidApiLevelDialogDelegate.init(this);
 
         init();
     }

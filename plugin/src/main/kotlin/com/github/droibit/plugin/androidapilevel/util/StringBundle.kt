@@ -1,6 +1,6 @@
 @file:JvmName("Strings")
 
-package com.github.droibit.plugin.androidapimap.util
+package com.github.droibit.plugin.androidapilevel.util
 
 import java.util.*
 
@@ -18,7 +18,7 @@ class StringBundle(private val stringMap: Map<String, String>) {
     val headerPlatformVersion by stringMap
     val headerVersionCode by stringMap
     val jsonPathAndroidApi by stringMap
-    val titleAndroidApiMapDialog by stringMap
+    val titleAndroidApiLevelDialog by stringMap
     val notificationErrorGroup by stringMap
     val notificationErrorTitle by stringMap
 

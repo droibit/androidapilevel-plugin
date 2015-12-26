@@ -1,8 +1,8 @@
-package com.github.droibit.plugin.androidapimap.model
+package com.github.droibit.plugin.androidapilevel.model
 
 import com.google.gson.Gson
 import org.hamcrest.CoreMatchers.*
-import org.junit.Assert.*
+import org.junit.Assert.assertThat
 import org.junit.Test
 
 /**
