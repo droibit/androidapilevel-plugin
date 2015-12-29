@@ -1,8 +1,7 @@
 package com.github.droibit.plugin.androidapilevel.model
 
+import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
-import org.hamcrest.CoreMatchers.*
-import org.junit.Assert.assertThat
 import org.junit.Test
 
 /**
@@ -24,14 +23,15 @@ class AndroidApiTest {
                   "versionCode": "M"
                 }
                 """
-        val api = gson.fromJson(marshmallowJson, AndroidApi::class.java)
+        val api = gson.fromJson(marshmallowJson, AndroidApi::class.java)!!
 
-        assertThat(api, `is`(notNullValue()))
-        assertThat(api.apiLevel, `is`(23))
-        assertThat(api.link.isNullOrEmpty(), `is`(false))
-        assertThat(api.link, `is`("http://developer.android.com/about/versions/marshmallow/android-6.0.html"))
-        assertThat(api.platformVersion, `is`(equalTo("Android 6.0")))
-        assertThat(api.versionCode, `is`("M"))
+        api.run {
+            assertThat(apiLevel).isEqualTo(23)
+            assertThat(link).isNotEmpty()
+            assertThat(link).isEqualTo("http://developer.android.com/about/versions/marshmallow/android-6.0.html")
+            assertThat(platformVersion).isEqualTo("Android 6.0")
+            assertThat(versionCode).isEqualTo("M")
+        }
     }
 
     @Test
@@ -42,10 +42,9 @@ class AndroidApiTest {
                   "platformVersions": ["4.0", "4.0.1", "4.0.2"]
                 }
                 """
-        val api = gson.fromJson(multiPlatformVersions, AndroidApi::class.java)
+        val api = gson.fromJson(multiPlatformVersions, AndroidApi::class.java)!!
 
-        assertThat(api, `is`(notNullValue()))
-        assertThat(api.platformVersion, `is`(equalTo("Android 4.0, 4.0.1, 4.0.2")))
+        assertThat(api.platformVersion).isEqualTo("Android 4.0, 4.0.1, 4.0.2")
     }
 
     @Test
@@ -59,10 +58,9 @@ class AndroidApiTest {
                   "versionCode": "BASE"
                 }
                 """
-        val api = gson.fromJson(notHasLink, AndroidApi::class.java)
+        val api = gson.fromJson(notHasLink, AndroidApi::class.java)!!
 
-        assertThat(api, `is`(notNullValue()))
-        assertThat(api.link.isNullOrEmpty(), `is`(true))
-        assertThat(api.link, `is`(nullValue()))
+        assertThat(api.link.isNullOrEmpty()).isTrue()
+        assertThat(api.link).isNull()
     }
 }

@@ -13,7 +13,7 @@ intellij {
 }
 
 group 'com.github.droibit'
-version '0.1.0-SNAPSHOT'
+version '0.1.0'
 
 repositories {
     mavenCentral()
@@ -30,6 +30,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testCompile 'junit:junit:4.12'
+    testCompile 'com.google.truth:truth:0.28'
 }
 
 task wrapper(type: Wrapper) {

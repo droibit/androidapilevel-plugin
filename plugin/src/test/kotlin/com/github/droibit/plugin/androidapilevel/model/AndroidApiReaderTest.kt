@@ -1,9 +1,7 @@
 package com.github.droibit.plugin.androidapilevel.model
 
 import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFile
-import org.hamcrest.CoreMatchers.*
-import org.hamcrest.Matchers.contains
-import org.junit.Assert.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import java.io.File
 
@@ -19,21 +17,20 @@ class AndroidApiReaderTest {
         val url = jsonFile(ANDROID_API_JSON_PATH)
         val jsonFile = File(url?.toURI())
 
-        assertThat(jsonFile.exists(), `is`(true))
+        assertThat(jsonFile.exists()).isTrue()
     }
 
     @Test
     fun readAndroidApisJson() {
-        val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))
+        val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
 
-        assertThat(androidApis, `is`(notNullValue()))
-        assertThat(androidApis!!.raw.size, `is`(23))
+        assertThat(androidApis!!.raw.size).isEqualTo(23)
     }
 
     @Test
     fun checkAndroidName() {
         val apis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
-        val androidNames = arrayOf(
+        val androidNames = listOf(
                 "Marshmallow",
                 "Lollipop",
                 "KitKat",
@@ -48,9 +45,10 @@ class AndroidApiReaderTest {
                 "-"
         )
 
-        val readAndroidNames = apis.sortedNameMap.keys
-        //assertThat(readAndroidNames, not(empty()))
-        assertThat(readAndroidNames, contains(*androidNames))
+        apis.run {
+            assertThat(sortedNameMap.keys).isNotEmpty()
+            assertThat(sortedNameMap.keys).containsAllIn(androidNames)
+        }
     }
 
     @Test
@@ -59,16 +57,16 @@ class AndroidApiReaderTest {
 
         val reversedApis = androidApis.raw.map { it.apiLevel }.reversed() // e.g. 23 .. 1 => 1 .. 23
         for (i in reversedApis.indices) {
-            assertThat(i+1, `is`(reversedApis[i]))
+            assertThat(i+1).isEqualTo(reversedApis[i])
         }
     }
 
     @Test
     fun readAndroidApisJsonIfNotExist() {
         val url = jsonFile("NotExist.json")
-        assertThat(url, `is`(nullValue()))
+        assertThat(url).isNull()
 
         val androidApis = AndroidApiReader.readFromJson(url)
-        assertThat(androidApis, `is`(nullValue()))
+        assertThat(androidApis).isNull()
     }
 }

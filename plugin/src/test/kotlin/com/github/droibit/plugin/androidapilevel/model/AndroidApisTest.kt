@@ -1,9 +1,7 @@
 package com.github.droibit.plugin.androidapilevel.model
 
+import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.sameInstance
-import org.junit.Assert.assertThat
 import org.junit.Test
 
 private const val JSON =
@@ -38,16 +36,18 @@ class AndroidApisTest {
     @Test
     fun itemSize() {
         val apis = gson.fromJson(JSON, AndroidApis::class.java)!!
-
-        assertThat(apis.size, `is`(2))
-        assertThat(apis.size, `is`(apis.raw.size))
+        apis.run {
+            assertThat(size).isEqualTo(2)
+            assertThat(size).isEqualTo(raw.size)
+        }
     }
 
     @Test
     fun operatorGet() {
         val apis = gson.fromJson(JSON, AndroidApis::class.java)!!
-
-        assertThat(apis[0], `is`(sameInstance(apis.raw[0])))
-        assertThat(apis[1], `is`(sameInstance(apis.raw[1])))
+        apis.run {
+            assertThat(this[0]).isSameAs(raw[0])
+            assertThat(this[1]).isSameAs(raw[1])
+        }
     }
 }

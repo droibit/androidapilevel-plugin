@@ -1,8 +1,6 @@
 package com.github.droibit.plugin.androidapilevel.util
 
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.notNullValue
-import org.junit.Assert.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 /**
@@ -14,10 +12,10 @@ class StringBundleTest {
     fun readStringsProperties() {
         val strings = StringBundle(bundleAsMap("strings"))
 
-        assertThat(strings, `is`(notNullValue()))
-        assertThat(strings.size, `is`(2))
-
-        assertThat(strings.errorJsonParse, `is`("Failed to read Android API data."))
-        assertThat(strings.errorLaunchBrowser, `is`("Failed to launch browser."))
+        strings.run {
+            assertThat(size).isEqualTo(2)
+            assertThat(errorJsonParse).isEqualTo("Failed to read Android API data.")
+            assertThat(errorLaunchBrowser).isEqualTo("Failed to launch browser.")
+        }
     }
 }
