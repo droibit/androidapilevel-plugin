@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/droibit/androidapilevel-plugin.svg)](https://travis-ci.org/droibit/androidapilevel-plugin)
 
-This Plugin to show Android API level and version name.
+Plugin to show Android API level and version name.
 
 ![ScreenShot](art/screenshot.png)
 
@@ -16,6 +16,14 @@ You presses button on toolbar, or to launch from the following shortcut.
 * Android Studio 1.3 or higher
 * IntelliJ Idea 1.4 or higher
 
+### Installation
+
+* From plugin repository  
+   `Preferences  > Plugins > Browse Repositories > Install` then restart IDE.
+* Manually  
+   Download plugin from [plugins.jetbrains.com](https://plugins.jetbrains.com/plugin/8121?pr=) or [GitHub Release](https://github.com/droibit/androidapilevel-plugin/releases).  
+   `Preferences  > Plugins > Install plugin from disk` then restart IDE.        
+    
 ## License
 
     Copyright 2015 Shinya Kumagai
