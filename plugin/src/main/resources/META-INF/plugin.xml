@@ -5,7 +5,7 @@
     <vendor email="roomful.rooms@gmail.com" url="https://github.com/droibit">Shinya Kumagai</vendor>
 
     <description><![CDATA[
-      Plugin to display Android API level and version name.
+      Plugin to show Android API level and version name.
     ]]></description>
 
     <change-notes><![CDATA[
