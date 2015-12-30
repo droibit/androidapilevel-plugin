@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.github.droibit.plugin.androidapilevel</id>
     <name>Android API Level</name>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <vendor email="roomful.rooms@gmail.com" url="https://github.com/droibit">Shinya Kumagai</vendor>
 
     <description><![CDATA[
@@ -9,7 +9,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      Release 0.1.0: Initial release.<br>
+      <ul>
+        <li>0.1.1: Fix appearance of api level table.</li>
+        <li>0.1.0: Initial release.</li>
+      </ul>
     ]]>
     </change-notes>
 
