@@ -71,7 +71,7 @@ private fun AndroidApiLevelDialog.initAppearance() {
 }
 
 private fun AndroidApiLevelDialog.initFooter() {
-    val url = URL(labelFooter.text)
+    val url = labelFooter.text
     labelFooter.apply {
         cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
         text = "${linkTextHtml(before = "From: ", text = url)}"
@@ -112,23 +112,23 @@ private fun AndroidApiLevelDialog.initTable() {
         }
     }
     apiTable.onMouseClicked { e ->
-        if (e.clickCount < 2) {
+        if (!e.isDoubleClicked()) {
             return@onMouseClicked
         }
         val table = e.source as JTable
-        if (COLUMN_PLATFORM_VERSION != table.selectedColumn) {
+        if (!table.selectedColumn.isPlatformVersion()) {
             return@onMouseClicked
         }
         val api = androidApis[table.selectedRow]
         api.link?.let {
-            open(URL(it)).withError { notifyError(stringBundle.errorLaunchBrowser) }
+            open(it).withError { notifyError(stringBundle.errorLaunchBrowser) }
         }
     }
 }
 
 private inline fun Component.onMouseClicked(crossinline action: (e: MouseEvent)->Unit) {
     addMouseListener(object: MouseAdapter() {
-        override fun mouseClicked(e: MouseEvent) { action(e) }
+        override fun mouseClicked(e: MouseEvent) = action(e)
     })
 }
 
@@ -145,17 +145,21 @@ private inline fun Boolean.withError(handler: ()->Unit) {
     }
 }
 
-private fun open(url: URL): Boolean {
+private fun open(urlString: String): Boolean {
     if (!Desktop.isDesktopSupported()) {
         return false
     }
     return try {
-        Desktop.getDesktop().browse(url.toURI())
+        Desktop.getDesktop().browse(URL(urlString).toURI())
         true
     } catch (e: Exception) {
         logger.error(e)
         false
     }
 }
+
+private fun MouseEvent.isDoubleClicked() = clickCount >= 2
+
+private fun Int.isPlatformVersion() = this == COLUMN_PLATFORM_VERSION
 
 private fun linkTextHtml(text: Any, before: String="", after: String="") = "<html>$before<font><u>$text</u></font>$after</html>"
