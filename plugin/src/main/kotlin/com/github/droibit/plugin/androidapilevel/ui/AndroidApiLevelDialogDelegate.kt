@@ -26,7 +26,7 @@ private val TABLE_HEADERS = arrayOf(
         stringBundle.headerName to 150,
         stringBundle.headerLevel to 50,
         stringBundle.headerPlatformVersion to 175,
-        stringBundle.headerVersionCode to 200
+        stringBundle.headerVersionCode to 225
 )
 private val logger = Logger.getInstance(AndroidApiLevelDialog::class.java.simpleName)
 
