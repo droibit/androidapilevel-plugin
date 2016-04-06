@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.0.35'
+    id 'org.jetbrains.intellij' version '0.0.43'
 }
 
 apply plugin: 'org.jetbrains.intellij'
@@ -8,7 +8,6 @@ apply plugin: 'kotlin'
 intellij {
     version '14.1.5'
     pluginName 'androidapilevel-plugin'
-    plugins 'android'
     updateSinceUntilBuild false
 }
 

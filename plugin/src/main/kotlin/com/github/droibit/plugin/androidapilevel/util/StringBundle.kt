@@ -28,7 +28,7 @@ class StringBundle(private val stringMap: Map<String, String>) {
 
 internal fun bundleAsMap(propPath: String): Map<String, String> {
     return ResourceBundle.getBundle(propPath).run {
-        keys.asSequence().toMap { it to getString(it) }
+        keys.asSequence().associate { it to getString(it) }
     }
 
 }
