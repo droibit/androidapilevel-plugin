@@ -92,7 +92,7 @@
     },
     {
       "apiLevel": 10,
-      "name": "Honeycomb",
+      "name": "Gingerbread",
       "link": "http://d.android.com/about/versions/android-2.3.3.html",
       "platformVersions": ["2.3.3", "2.3.4"],
       "versionCode": "GINGERBREAD_MR1"
