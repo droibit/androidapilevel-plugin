@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>com.github.droibit.plugin.androidapilevel</id>
     <name>Android API Level</name>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <vendor email="roomful.rooms@gmail.com" url="https://github.com/droibit">Shinya Kumagai</vendor>
 
     <description><![CDATA[
@@ -10,7 +10,8 @@
 
     <change-notes><![CDATA[
       <ul>
-        <li>0.1.1: Fix appearance of api level table.</li>
+        <li>0.1.2: Fixed version name of Gingerbread(2.3.3, 2.3.4).</li>
+        <li>0.1.1: Fixed appearance of api level table.</li>
         <li>0.1.0: Initial release.</li>
       </ul>
     ]]>
