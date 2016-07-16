@@ -1,6 +1,13 @@
 {
   "apis": [
     {
+      "apiLevel": 24,
+      "name": "Nougat",
+      "link": "https://developer.android.com/preview/index.html",
+      "platformVersions": ["7.0"],
+      "versionCode": "N"
+    },
+    {
       "apiLevel": 23,
       "name": "Marshmallow",
       "link": "http://d.android.com/about/versions/marshmallow/android-6.0.html",
