@@ -36,10 +36,6 @@ dependencies {
     testCompile 'com.google.truth:truth:0.28'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.9'
-}
-
 task copyResourceJson(type: Copy) {
     from 'src/main/resources/AndroidAPIs.json'
     into 'src/test/resources'
