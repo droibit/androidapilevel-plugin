@@ -4,7 +4,7 @@
 
 Plugin to show Android API level and version name.
 
-![ScreenShot](art/screenshot.png)
+![ScreenShot](art/screenshot.jpg)
 
 You presses button on toolbar, or to launch from the following shortcut.
 
