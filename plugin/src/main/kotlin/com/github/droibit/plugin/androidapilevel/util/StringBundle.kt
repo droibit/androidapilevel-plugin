@@ -30,5 +30,4 @@ internal fun bundleAsMap(propPath: String): Map<String, String> {
     return ResourceBundle.getBundle(propPath).run {
         keys.asSequence().associate { it to getString(it) }
     }
-
 }

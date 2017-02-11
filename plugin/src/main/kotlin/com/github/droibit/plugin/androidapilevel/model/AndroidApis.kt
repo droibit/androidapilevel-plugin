@@ -20,8 +20,8 @@ data class AndroidApis(@SerializedName("apis") val raw: Array<AndroidApi>) {
     val size: Int
         get() = raw.size
 
-    final operator fun get(index: Int) = raw[index]
-    final operator fun iterator() = raw.iterator()
+    operator fun get(index: Int) = raw[index]
+    operator fun iterator() = raw.iterator()
 }
 
 /**
@@ -57,11 +57,10 @@ object AndroidApiReader {
 
     var logger: Logger? = null
 
-    internal fun jsonFile(fileName: String): URL?
-            = javaClass.classLoader.getResource(fileName)
+    internal fun jsonFileURL(fileName: String): URL = javaClass.classLoader.getResource(fileName)
 
-    fun readFromJson(jsonUrl: URL?) = try {
-        val json = File(jsonUrl?.toURI()).readText()
+    fun readFromJson(jsonUrl: URL) = try {
+        val json = File(jsonUrl.file).readText()
         gson.fromJson(json, AndroidApis::class.java)
     } catch (e: Exception) {
         logger?.error("Json Parse Error", e)

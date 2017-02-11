@@ -1,6 +1,6 @@
 package com.github.droibit.plugin.androidapilevel.model
 
-import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFile
+import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFileURL
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import java.io.File
@@ -14,22 +14,23 @@ class AndroidApiReaderTest {
 
     @Test
     fun makeJsonFileURL() {
-        val url = jsonFile(ANDROID_API_JSON_PATH)
-        val jsonFile = File(url?.toURI())
+        val url = jsonFileURL(ANDROID_API_JSON_PATH)
+        val jsonFile = File(url.toURI())
 
         assertThat(jsonFile.exists()).isTrue()
     }
 
     @Test
     fun readAndroidApisJson() {
-        val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
+        val jsonFile = jsonFileURL(ANDROID_API_JSON_PATH)
+        val androidApis = AndroidApiReader.readFromJson(jsonFile)!!
 
-        assertThat(androidApis!!.raw.size).isEqualTo(23)
+        assertThat(androidApis.raw).hasLength(25)
     }
 
     @Test
     fun checkAndroidName() {
-        val apis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
+        val apis = AndroidApiReader.readFromJson(jsonFileURL(ANDROID_API_JSON_PATH))!!
         val androidNames = listOf(
                 "Marshmallow",
                 "Lollipop",
@@ -53,20 +54,11 @@ class AndroidApiReaderTest {
 
     @Test
     fun checkApiLevels() {
-        val androidApis = AndroidApiReader.readFromJson(jsonFile(ANDROID_API_JSON_PATH))!!
+        val androidApis = AndroidApiReader.readFromJson(jsonFileURL(ANDROID_API_JSON_PATH))!!
 
         val reversedApis = androidApis.raw.map { it.apiLevel }.reversed() // e.g. 23 .. 1 => 1 .. 23
         for (i in reversedApis.indices) {
             assertThat(i+1).isEqualTo(reversedApis[i])
         }
-    }
-
-    @Test
-    fun readAndroidApisJsonIfNotExist() {
-        val url = jsonFile("NotExist.json")
-        assertThat(url).isNull()
-
-        val androidApis = AndroidApiReader.readFromJson(url)
-        assertThat(androidApis).isNull()
     }
 }

@@ -4,7 +4,7 @@ package com.github.droibit.plugin.androidapilevel.ui
 
 import com.github.droibit.plugin.androidapilevel.model.AndroidApi
 import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader
-import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFile
+import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFileURL
 import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.readFromJson
 import com.github.droibit.plugin.androidapilevel.util.stringBundle
 import com.intellij.openapi.diagnostic.Logger
@@ -74,7 +74,7 @@ private fun AndroidApiLevelDialog.initFooter() {
     val url = labelFooter.text
     labelFooter.apply {
         cursor = Cursor.getPredefinedCursor(HAND_CURSOR)
-        text = "${linkTextHtml(before = "From: ", text = url)}"
+        text = linkTextHtml(before = "From: ", text = url)
     }
     labelFooter.onMouseClicked {
         open(url).withError { notifyError(stringBundle.errorLaunchBrowser) }
@@ -84,7 +84,7 @@ private fun AndroidApiLevelDialog.initFooter() {
 private fun AndroidApiLevelDialog.initTable() {
     AndroidApiReader.logger = logger
 
-    val jsonFile = jsonFile(stringBundle.jsonPathAndroidApi)
+    val jsonFile = jsonFileURL(stringBundle.jsonPathAndroidApi)
     val androidApis = checkNotNull(readFromJson(jsonFile)) {
         notifyError(stringBundle.errorJsonParse)
         return
