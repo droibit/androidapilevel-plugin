@@ -1,14 +1,18 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.0.43'
+    id 'org.jetbrains.intellij' version '0.1.10'
 }
 
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'kotlin'
 
+def isCi = 'true'.equals(System.getenv('CI'))
+
 intellij {
-    version '14.1.5'
+    version '2016.1.3'
     pluginName 'androidapilevel-plugin'
     updateSinceUntilBuild false
+    sameSinceUntilBuild false
+    downloadSources !isCi
 
     publish {
         pluginId '8121'
@@ -36,7 +40,7 @@ dependencies {
     testCompile 'com.google.truth:truth:0.28'
 }
 
-task copyResourceJson(type: Copy) {
+task copyResourcesJson(type: Copy) {
     from 'src/main/resources/AndroidAPIs.json'
     into 'src/test/resources'
 }
