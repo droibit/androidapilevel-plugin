@@ -1,9 +1,16 @@
 {
   "apis": [
     {
+      "apiLevel": 25,
+      "name": "Nougat",
+      "link": "https://developer.android.com/about/versions/nougat/android-7.1.html",
+      "platformVersions": ["7.1"],
+      "versionCode": "N_MR1"
+    },
+    {
       "apiLevel": 24,
       "name": "Nougat",
-      "link": "https://developer.android.com/preview/index.html",
+      "link": "https://developer.android.com/about/versions/nougat/android-7.0.html",
       "platformVersions": ["7.0"],
       "versionCode": "N"
     },

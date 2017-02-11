@@ -1,6 +1,20 @@
 {
   "apis": [
     {
+      "apiLevel": 25,
+      "name": "Nougat",
+      "link": "https://developer.android.com/about/versions/nougat/android-7.1.html",
+      "platformVersions": ["7.1"],
+      "versionCode": "N_MR1"
+    },
+    {
+      "apiLevel": 24,
+      "name": "Nougat",
+      "link": "https://developer.android.com/about/versions/nougat/android-7.0.html",
+      "platformVersions": ["7.0"],
+      "versionCode": "N"
+    },
+    {
       "apiLevel": 23,
       "name": "Marshmallow",
       "link": "http://d.android.com/about/versions/marshmallow/android-6.0.html",
@@ -92,7 +106,7 @@
     },
     {
       "apiLevel": 10,
-      "name": "Honeycomb",
+      "name": "Gingerbread",
       "link": "http://d.android.com/about/versions/android-2.3.3.html",
       "platformVersions": ["2.3.3", "2.3.4"],
       "versionCode": "GINGERBREAD_MR1"
