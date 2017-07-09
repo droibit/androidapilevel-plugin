@@ -10,6 +10,7 @@ import java.awt.Component
 import java.awt.Cursor
 import java.awt.Cursor.HAND_CURSOR
 import java.awt.Desktop
+import java.awt.Dimension
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.net.URL
@@ -20,10 +21,10 @@ import javax.swing.table.DefaultTableModel
 
 private const val COLUMN_PLATFORM_VERSION = 2
 
-private val TABLE_HEADERS = arrayOf(
-        stringBundle.headerName to 150,
+private val TABLE_HEADERS_WITH_WIDTH = arrayOf(
+        stringBundle.headerName to 160,
         stringBundle.headerLevel to 50,
-        stringBundle.headerPlatformVersion to 175,
+        stringBundle.headerPlatformVersion to 220,
         stringBundle.headerVersionCode to 225
 )
 private val logger = Logger.getInstance(AndroidApiLevelDialog::class.java.simpleName)
@@ -57,7 +58,6 @@ fun init(dialog: AndroidApiLevelDialog) {
 }
 
 private fun AndroidApiLevelDialog.initAppearance() {
-    setSize(600, 550)
     title = stringBundle.titleAndroidApiLevelDialog
     isModal = true
 }
@@ -81,7 +81,7 @@ private fun AndroidApiLevelDialog.initTable() {
         return
     }
 
-    val headers = TABLE_HEADERS.map { it.first }.toTypedArray()
+    val headers = TABLE_HEADERS_WITH_WIDTH.map { it.first }.toTypedArray()
     val tableModel = ApiTableModel(columnNames = headers).apply {
         for (api in androidApis) {
             addRow(api.toArray())
@@ -92,8 +92,8 @@ private fun AndroidApiLevelDialog.initTable() {
         model = tableModel
         setShowGrid(false)
 
-        for (i in TABLE_HEADERS.indices) {
-            val (name, width) = TABLE_HEADERS[i]
+        for (i in TABLE_HEADERS_WITH_WIDTH.indices) {
+            val (name, width) = TABLE_HEADERS_WITH_WIDTH[i]
             getColumn(name).apply {
                 if (COLUMN_PLATFORM_VERSION == i) {
                     cellRenderer = LinkableLabelCellRenderer(androidApis.raw)
