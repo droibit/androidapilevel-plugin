@@ -19,8 +19,8 @@
     ]]>
     </change-notes>
 
-    <!-- Android Studio 1.3 and Intellij 14.1 -->
-    <idea-version since-build="141.1532"/>
+    <!-- Android Studio 2.2 and Intellij 2016.1 -->
+    <idea-version since-build="145"/>
 
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
          on how to target different products -->
