@@ -26,9 +26,6 @@ private const val JSON =
             }
             """
 
-/**
- * @author kumagai
- */
 class AndroidApisTest {
 
     private val gson = Gson()

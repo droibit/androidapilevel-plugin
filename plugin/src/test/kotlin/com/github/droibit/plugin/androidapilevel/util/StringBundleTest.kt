@@ -3,9 +3,6 @@ package com.github.droibit.plugin.androidapilevel.util
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-/**
- * @author kumagai
- */
 class StringBundleTest {
 
     @Test

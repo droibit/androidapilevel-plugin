@@ -4,8 +4,6 @@ package com.github.droibit.plugin.androidapilevel.ui
 
 import com.github.droibit.plugin.androidapilevel.model.AndroidApi
 import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader
-import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.jsonFileURL
-import com.github.droibit.plugin.androidapilevel.model.AndroidApiReader.readFromJson
 import com.github.droibit.plugin.androidapilevel.util.stringBundle
 import com.intellij.openapi.diagnostic.Logger
 import java.awt.Component
@@ -30,18 +28,12 @@ private val TABLE_HEADERS = arrayOf(
 )
 private val logger = Logger.getInstance(AndroidApiLevelDialog::class.java.simpleName)
 
-/**
- * @author kumagai
- */
 private class ApiTableModel(columnNames: Array<String>, columnCount: Int = 0)
     : DefaultTableModel(columnNames, columnCount) {
 
     override fun isCellEditable(row: Int, column: Int) = false
 }
 
-/**
- * @author kumagai
- */
 private class LinkableLabelCellRenderer(private val apis: Array<AndroidApi>)
     : DefaultTableCellRenderer() {
 
@@ -84,8 +76,7 @@ private fun AndroidApiLevelDialog.initFooter() {
 private fun AndroidApiLevelDialog.initTable() {
     AndroidApiReader.logger = logger
 
-    val jsonFile = jsonFileURL(stringBundle.jsonPathAndroidApi)
-    val androidApis = checkNotNull(readFromJson(jsonFile)) {
+    val androidApis = checkNotNull(AndroidApiReader.readFromJson(stringBundle.jsonPathAndroidApi)) {
         notifyError(stringBundle.errorJsonParse)
         return
     }
@@ -126,8 +117,8 @@ private fun AndroidApiLevelDialog.initTable() {
     }
 }
 
-private inline fun Component.onMouseClicked(crossinline action: (e: MouseEvent)->Unit) {
-    addMouseListener(object: MouseAdapter() {
+private inline fun Component.onMouseClicked(crossinline action: (e: MouseEvent) -> Unit) {
+    addMouseListener(object : MouseAdapter() {
         override fun mouseClicked(e: MouseEvent) = action(e)
     })
 }
@@ -139,7 +130,7 @@ private fun AndroidApi.toArray() = arrayOf(
         versionCode
 )
 
-private inline fun Boolean.withError(handler: ()->Unit) {
+private inline fun Boolean.withError(handler: () -> Unit) {
     if (!this) {
         handler()
     }
@@ -162,4 +153,4 @@ private fun MouseEvent.isDoubleClicked() = clickCount >= 2
 
 private fun Int.isPlatformVersion() = this == COLUMN_PLATFORM_VERSION
 
-private fun linkTextHtml(text: Any, before: String="", after: String="") = "<html>$before<font><u>$text</u></font>$after</html>"
+private fun linkTextHtml(text: Any, before: String = "", after: String = "") = "<html>$before<font><u>$text</u></font>$after</html>"

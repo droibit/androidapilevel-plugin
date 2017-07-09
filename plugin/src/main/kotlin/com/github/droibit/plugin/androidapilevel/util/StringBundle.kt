@@ -2,13 +2,11 @@
 
 package com.github.droibit.plugin.androidapilevel.util
 
+import com.google.common.annotations.VisibleForTesting
 import java.util.*
 
 val stringBundle: StringBundle by lazy { StringBundle(bundleAsMap("strings/strings")) }
 
-/**
- * @author kumagai
- */
 class StringBundle(private val stringMap: Map<String, String>) {
 
     val errorJsonParse by stringMap
@@ -26,7 +24,8 @@ class StringBundle(private val stringMap: Map<String, String>) {
         get() = stringMap.size
 }
 
-internal fun bundleAsMap(propPath: String): Map<String, String> {
+@VisibleForTesting
+fun bundleAsMap(propPath: String): Map<String, String> {
     return ResourceBundle.getBundle(propPath).run {
         keys.asSequence().associate { it to getString(it) }
     }
