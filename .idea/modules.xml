@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidapilevel-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/androidapilevel-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/androidapilevel-plugin-plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/androidapilevel-plugin-plugin_main.iml" group="plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/androidapilevel-plugin-plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/androidapilevel-plugin-plugin_test.iml" group="plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin.iml" group="plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin_main.iml" group="plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin_test.iml" group="plugin" />
     </modules>
   </component>
 </project>
