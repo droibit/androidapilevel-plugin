@@ -13,8 +13,8 @@ You presses button on toolbar, or to launch from the following shortcut.
 
 ### Support
 
-* Android Studio 1.3 or higher
-* IntelliJ Idea 1.4 or higher
+* Android Studio 2.2 or higher
+* IntelliJ Idea 2016.2 or higher
 
 ### Installation
 
