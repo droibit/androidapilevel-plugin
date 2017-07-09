@@ -4,7 +4,7 @@
       "apiLevel": 25,
       "name": "Nougat",
       "link": "https://developer.android.com/about/versions/nougat/android-7.1.html",
-      "platformVersions": ["7.1"],
+      "platformVersions": ["7.1", "7.1.1"],
       "versionCode": "N_MR1"
     },
     {
