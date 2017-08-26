@@ -20,8 +20,7 @@ class StringBundle(private val stringMap: Map<String, String>) {
     val notificationErrorGroup by stringMap
     val notificationErrorTitle by stringMap
 
-    val size: Int
-        get() = stringMap.size
+    val size: Int get() = stringMap.size
 }
 
 @VisibleForTesting

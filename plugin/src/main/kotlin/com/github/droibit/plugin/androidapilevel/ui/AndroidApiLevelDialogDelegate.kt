@@ -101,18 +101,18 @@ private fun AndroidApiLevelDialog.initTable() {
                 preferredWidth = width
             }
         }
-    }
-    apiTable.onMouseClicked { e ->
-        if (!e.isDoubleClicked()) {
-            return@onMouseClicked
-        }
-        val table = e.source as JTable
-        if (!table.selectedColumn.isPlatformVersion()) {
-            return@onMouseClicked
-        }
-        val api = androidApis[table.selectedRow]
-        api.link?.let {
-            open(it).withError { notifyError(stringBundle.errorLaunchBrowser) }
+
+        onMouseClicked { e ->
+            if (!e.isDoubleClicked) {
+                return@onMouseClicked
+            }
+            val table = e.source as JTable
+            if (!table.selectedColumn.isPlatformVersion) {
+                return@onMouseClicked
+            }
+            androidApis[table.selectedRow].link?.let {
+                open(it).withError { notifyError(stringBundle.errorLaunchBrowser) }
+            }
         }
     }
 }
@@ -136,6 +136,10 @@ private inline fun Boolean.withError(handler: () -> Unit) {
     }
 }
 
+private val MouseEvent.isDoubleClicked get() = clickCount >= 2
+
+private val Int.isPlatformVersion get() = this == COLUMN_PLATFORM_VERSION
+
 private fun open(urlString: String): Boolean {
     if (!Desktop.isDesktopSupported()) {
         return false
@@ -148,9 +152,5 @@ private fun open(urlString: String): Boolean {
         false
     }
 }
-
-private fun MouseEvent.isDoubleClicked() = clickCount >= 2
-
-private fun Int.isPlatformVersion() = this == COLUMN_PLATFORM_VERSION
 
 private fun linkTextHtml(text: Any, before: String = "", after: String = "") = "<html>$before<font><u>$text</u></font>$after</html>"
