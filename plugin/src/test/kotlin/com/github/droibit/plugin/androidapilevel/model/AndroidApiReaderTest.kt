@@ -11,7 +11,7 @@ class AndroidApiReaderTest {
     fun readAndroidApisJson() {
         val androidApis = AndroidApiReader.readFromJson(ANDROID_API_JSON_PATH)!!
 
-        assertThat(androidApis.raw).hasLength(25)
+        assertThat(androidApis.raw).hasLength(26)
     }
 
     @Test
