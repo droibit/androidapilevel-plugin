@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.2.13'
+    id 'org.jetbrains.intellij' version '0.2.18'
 }
 
 apply plugin: 'kotlin'
@@ -36,7 +36,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testCompile 'junit:junit:4.12'
-    testCompile 'com.google.truth:truth:0.28'
+    testCompile 'com.google.truth:truth:0.39'
 }
 
 task copyResourcesJson(type: Copy) {
