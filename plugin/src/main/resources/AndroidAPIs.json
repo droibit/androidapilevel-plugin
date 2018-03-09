@@ -1,6 +1,13 @@
 {
   "apis": [
     {
+      "apiLevel": 27,
+      "name": "Oreo",
+      "link": "https://developer.android.com/about/versions/oreo/android-8.1.html",
+      "platformVersions": ["8.1"],
+      "versionCode": "O_MR1"
+    },
+    {
       "apiLevel": 26,
       "name": "Oreo",
       "link": "https://developer.android.com/about/versions/oreo/android-8.0.html",
