@@ -12,17 +12,16 @@ intellij {
     updateSinceUntilBuild false
     sameSinceUntilBuild false
     downloadSources !isCi
+}
 
-    publish {
-        pluginId '8121'
-        // set values in ~/.gradle/gradle.properties.
-        password project.properties['intellij.publish.password']
-        username project.properties['intellij.publish.username']
-    }
+publishPlugin {
+    // set values in ~/.gradle/gradle.properties.
+    password project.properties['intellij.publish.password']
+    username project.properties['intellij.publish.username']
 }
 
 group 'com.github.droibit'
-version '0.1.6'
+version '0.1.7'
 
 repositories {
     mavenCentral()
